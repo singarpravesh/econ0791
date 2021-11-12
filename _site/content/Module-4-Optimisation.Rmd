@@ -1,0 +1,63 @@
+---
+title: "Module 4: Optimisation"
+output: html_document
+---
+
+This module will deal with optimisation problem using the Solver plugin in Excel.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xmc_yY7A4LU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UF2HRpkSwrM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gtiGrG7zAqo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Prodmix.xlsx](Module-4-Optimisation/Prodmix.xlsx) used in the video and practice.
+- Exercises:
+  1. Suppose your drug company can purchase up to 500 hours of labor at $1 more per hour than current labor costs. How can it maximize profit?
+  1. At a chip manufacturing plant, four technicians (A, B, C, and D) produce three products (Products 1, 2, and 3). This month, the chip manufacturer can sell 80 units of Product 1, 50 units of Product 2, and, at most, 50 units of Product 3. Technician A can make only Products 1 and 3. Technician B can make only Products 1 and 2. Technician C can make only Product 3. Technician D can make only Product 2. For each unit produced, the products contribute the following profit: Product 1, $\$6$; Product 2, $\$7$; and Product 3, $\$10$. The time (in hours) each technician needs to manufacture a product is as follows:
+     ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+  library(tidyverse)
+  tibble(
+  Product = c(1,2,3),
+  `Technician A` = c(2, "Cannot do", 3),
+  `Technician B` = c(2.5,3,"Cannot do"),
+  `Technician C` = c("Cannot do", "Cannot do", 4),
+  `Technician D` = c("Cannot do", 3.5, "Cannot do")
+  ) %>%
+  knitr::kable(align = "c", position = "center") 
+     ```
+     Each technician can work up to 120 hours per month. How can the chip manufacturer maximize its monthly profit? Assume a fractional number of units can be produced.
+
+  1. A computer manufacturing plant produces mice, keyboards, and video game joysticks. The per-unit profit, per-unit labor usage, monthly demand, and per-unit machine-time usage are given in the following table:
+     ```{r,echo=FALSE, warning=FALSE, message=FALSE}
+  library(tidyverse)
+  tibble(
+  ` `  = c("Profit/unit", "Labour usage/unit", "Machine time/unit","Monthly demand"),
+  Mice = c("$8", "0.2 hour", "0.4 hour", "15000"),
+  Keyboards = c("$11", "0.3 hour", "0.055 hour", "29,000"),
+  Joystics = c("$9", "0.24 hour", "0.04 hour", "11,000")
+  ) %>%
+    knitr::kable(align = c("l","c", "c", "c"), position = "center")
+     ```
+     Each month, a total of 13,000 labor hours and 3,000 hours of machine time are available. How can the manufacturer maximize its monthly profit contribution from the plant?
+  
+  1. Resolve your drug example, assuming that a minimum demand of 200 units for each drug must be met.
+  1. Jason makes diamond bracelets, necklaces, and earrings. He wants to work a maximum of 160 hours per month. He has 800 ounces of diamonds. The profit, labor time, and ounces of diamonds required to produce each product are as follows. If demand for each product is unlimited, how can Jason maximize his profit?
+     ```{r, echo=FALSE, warning=FALSE, message=FALSE}
+     library(tidyverse)
+     tibble(
+     Product = c("Bracelet", "Necklace", "Earrings"),
+     `Unit profit` = c("$300", "$200", "$100"),
+     `Labor hours per unit` = c(0.35,0.15, 0.05),
+     `Ounces of diamonds per unit` = c(1.2, 0.75, 0.5)
+     ) %>% 
+     knitr::kable(align = "c")
+     ```
+     In your product mix example, suppose that whenever you sell more than 400 pounds of any product, you must give a $\$1$ per pound discount on each pound above 400 sold. How does this change the answer to the problem?
+  1. If demand is unlimited and negative production is allowed, find a feasible solution that earns a billion dollars.
+  1. Assuming unlimited demand and unlimited resources, find a feasible solution that earns $\$1$ billion in profit.
+  1. Suppose that the firm's production function is $Q = F(K,L)= 50K^{0.5}L^{0.5}$. Suppose, too, that the price of labour $w=5$ and the price of capital $r=20$. What is the cost minimising input bundle if the firm wants to produce $1,000$ units per year? (David Besanko, Ronald R. Braeutigam. Microeconomics. Wiley.) 
+  
+
+  
+  

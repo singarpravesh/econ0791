@@ -1,0 +1,8 @@
+navbar: 
+  title: ECON0791
+  right:
+  - text: Lecture Materials
+    href: content.html
+output:
+  html_document:
+    theme: flatly

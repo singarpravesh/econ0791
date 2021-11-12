@@ -1,0 +1,65 @@
+---
+title: "Module 3: Descriptive Statistics"
+output: html_document
+---
+
+# Contents
+[3.1 Univariate data](#three-one)<br>
+[3.2 Multivariate data](#three-two)
+
+
+---
+
+## 3.1 Univariate data {#three-one}
+In this lecture video we shall cover the Measures of Central Tendency, Measures of Dispersion, treatment of outliers,rank with and without ties, and Moments and Order Statistics.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AVHYWnZ2vp8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/juu1I3NYc5Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+In the above video i.e. Part 2, please note that the explanation for TRIMMEAN() function will hold true only if I had sorted the data in ascending or descending form. Else the explanation is that trim mean is calculated by deleting the x number of highest and the lowest values, and NOT the top or bottom values in an un-sorted/any random data series.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/stP_zzdinTw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uO8UPC1exeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ImA4Y32t8f4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the files [descriptiveStats](Module-3-Descriptive-Stats/descriptiveStats.docx) and  [Stock.xlsx](Module-3-Descriptive-Stats/Stock.xlsx) used in the video and practice. 
+- Exercises:
+  1. Use the data in the [Stock.xlsx](Module-3-Descriptive-Stats/Stock.xlsx) file to generate descriptive statistics for Intel and GE stock.
+  2. Use your answer to Problem 1 to compare the monthly returns on Intel and GE stock.
+  3. City Power & Light produces voltage-regulating equipment in New York and ships the equipment to Chicago. A voltage regulator is considered acceptable if it can hold a voltage of 25 to 75 volts. The voltage held by each unit is measured in New York before each unit is shipped. The voltage is measured again when the unit arrives in Chicago. A sample of voltage measurements from each city is given in the [Citypower.xlsx](Module-3-Descriptive-Stats/Citypower.xlsx) file:
+  Using descriptive statistics, comment on what you have learned about the voltage units hold before and after shipment.<br>
+    • What percentage of units is acceptable before and after shipping?<br>
+    • Do you have any suggestions about how to improve the quality of City Power & Light’s    regulators?<br>
+    • Ten percent of all New York regulators have a voltage exceeding what value?<br>
+    • Five percent of all New York regulators have a voltage less than or equal to what value?
+  4. In the [Decadeincome.xlsx](Module-3-Descriptive-Stats/Decadeincome.xlsx) file, you are given a sample of incomes (in thousands of 1980 dollars) for a set of families sampled in 1980 and 1990. Assume that these families are representative of the whole United States. Republicans claim that the country was better off in 1990 than in 1980 because average income increased. Do you agree?
+  5. Use descriptive statistics to compare the annual returns on stocks, T-bills, and corporate bonds. Use the data contained in the [Historicalinvest.xlsx](Module-3-Descriptive-Stats/Historicalinvest.xlsx) file.
+  6. In 1970 and 1971, eligibility for the US armed services draft was determined on the basis of a draft lottery number. The number was determined by birth date. A total of 366 balls, one for each possible birth date, were placed in a container and shaken. The first ball selected was given the number 1 in the lottery, the second ball the number 2, and so on. Men whose birthdays corresponded to the lowest numbers were drafted first. The [Draftlottery.xlsx](Module-3-Descriptive-Stats/Draftlottery.xlsx) file contains the actual results of the 1970 and 1971 drawings. For example, in the 1970 drawing, January 1 received the number 305. Use descriptive statistics to demonstrate that the 1970 draft lottery was not random and the 1971 lottery was random. (Hint: Use the AVERAGE and MEDIAN functions to compute the mean and median lottery number for each month.)
+  7. The [Jordan.xlsx](Module-3-Descriptive-Stats/Jordan.xlsx) file gives the starting salaries (hypothetical) of all 1984 geography graduates from the University of North Carolina (UNC). What is your best estimate of a typical starting salary for a geography major? In reality, the major at UNC having the highest average starting salary in 1984 was geography because the great basketball player Michael Jordan was a geography major!
+  8. Use the LARGE or SMALL function to sort the annual stock returns in the [Historicalinvest.xlsx](Module-3-Descriptive-Stats/Historicalinvest.xlsx) file. What advantage does this method of sorting have over clicking the Sort button?
+  9. Compare the mean, median, and trimmed mean (trimming 10 percent of the data) of the annual returns on stocks, T-bills, and corporate bonds given in the [Historicalinvest.xlsx](Module-3-Descriptive-Stats/Historicalinvest.xlsx) file.
+  10. Use the geometric mean to estimate the mean annual return on stocks, bonds, and T-bills in the [Historicalinvest.xlsx](Module-3-Descriptive-Stats/Historicalinvest.xlsx) file.
+  11. The [Dow.xlsx](Module-3-Descriptive-Stats/Dow.xlsx) file contains monthly returns on the 30 Dow stocks during the past 20 years. Use this data to determine the three stocks with the largest mean monthly returns.
+  12. Using the [Dow.xlsx](Module-3-Descriptive-Stats/Dow.xlsx) data again, determine the three stocks with the most risk or variability.
+  13. Using the [Dow.xlsx](Module-3-Descriptive-Stats/Dow.xlsx) data, determine the three stocks with the highest skew.
+  14. Using the [Dow.xlsx](Module-3-Descriptive-Stats/Dow.xlsx) data, how do the trimmed-mean returns (trim off 10 percent of the returns) differ from the overall mean returns?
+  15. The [Incomedata.xlsx](Module-3-Descriptive-Stats/Incomedata.xlsx) file contains incomes of a representative sample of Americans in years 1975, 1985, 1995, and 2005. Describe how US personal income has changed over this time period.
+  16. The [Coltsdata.xlsx](Module-3-Descriptive-Stats/coltsdata.xlsx) file contains yards gained by the 2006 Indianapolis Colts on each rushing and passing play. Describe how the outcomes of rushing plays and passing plays differ.
+  
+---
+
+## 3.2 Multivariate data {#three-two}
+In this video we shall discuss covariance, correlation matrix, and partial correlation.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/o34gdNnSAbY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Stockcorrel.xlsx](Module-3-Descriptive-Stats/Stockcorrel.xlsx) used in the video and practice.
+- Exercises:
+  - The data for the following problems is in file [Ch56data.xlsx](Module-3-Descriptive-Stats/Ch56data.xlsx):
+    1. The Problem 1 worksheet contains the number of cars parked each day both in the outdoor lot and in the parking garage near the Indiana University Kelley School of Business. Find and interpret the correlation between the number of cars parked in the outdoor lot and in the parking garage.
+    2. The Problem 2 worksheet contains daily sales volume (in dollars) of laser printers, printer cartridges, and school supplies. Find and interpret the correlations between these quantities.
+    3. The Problem 3 worksheet contains annual returns on stocks, T-bills, and T-bonds. Find and interpret the correlations between the annual returns on these three classes of investments.
+    4. In the Problem 3 worksheet find and interpret the partial correlations considering each variable constant each time. (For e.g. if you are considering the partial correlation between stocks and T-bills given T-bonds, your next task would be finding partial correlation between stocks and T-bonds given T-bills, and so on).

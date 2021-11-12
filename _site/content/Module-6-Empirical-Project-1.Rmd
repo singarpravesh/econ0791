@@ -1,0 +1,38 @@
+---
+title: "Module 6: Empirical Project 1"
+output: bookdown::html_document2
+---
+
+*This project is based on the content and materials of (www.core-econ.org) *
+
+# Project: The behaviour of average surface temperature over time
+
+In this project we shall consider the data from NASA about land-ocean temperature anomalies in the northern hemisphere. Figure \@ref(fig:1) is constructed using this data and shows temperatures in northern hemisphere over the period 1880-2019, expressed as differences from the average temperature from 1951-1980.
+
+```{r 1, fig.cap= "Average temperature anomaly",  echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+read.csv("Module-6-Empirical-Project-1/NASA.csv", header = TRUE, na.strings = "***")  %>%
+  na.omit() %>% 
+  mutate(jd = ts(J.D, start = c(1881), end = c(2019), frequency = 1)) %>% 
+  select(Year, jd) %>% 
+  ggplot(aes(Year, jd))+
+  geom_line()+
+  labs(y = "Average temperature anomalies", title = "Average temperature anomaly in January\n in the northern hemisphere (1880 - 2019)")+
+  geom_hline(yintercept = 0, col = "red")+
+  geom_text(aes(label = "1951 - 1980 Average"),x = 2000, y = -0.1)
+  
+```
+
+
+- Go to NASA's [Goddard Institute for Space Studies website](https://data.giss.nasa.gov/gistemp/).
+- Under the subheading ‘Combined Land-Surface Air and Sea-Surface Water Temperature Anomalies’, select the CSV version of ‘Northern Hemisphere-mean monthly, seasonal, and annual means’ (right-click and select ‘Save Link As…’).
+- The default name of this file is NH.Ts+dSST.csv. Give it a suitable name and save it in an easily accessible location, such as a folder on your Desktop or in your personal folder.
+
+# Questions
+1. Choose one month and plot a line chart with average [temperature anomaly](https://data.giss.nasa.gov/gistemp/faq/#q101) on the vertical axis and time (from 1880 to the latest year available) on the horizontal axis. Label each axis and give a suitable title to your chart.
+
+1. The columns labeled ‘DJF’, ‘MAM’, ‘JJA’, and ‘SON’ contain seasonal averages (means). For example, the ‘MAM’ column contains the average of the March, April, and May columns for each year. Plot a separate line chart for each season, using average temperature anomaly for that season on the vertical axis and time (from 1880 to the latest year available) on the horizontal axis.
+1. The column labeled **J-D** contains the average temperature anomaly for each year.
+  a. Plot a line chart with annual average temperature anomaly on the vertical axis and time on the horizontal axis. Your chart should look like Figure \@ref(fig:1). Add a horizontal line that intersects the vertical axis at 0, and label it '1951-1980 average'.
+  b. What do your charts from the above questions suggest about the relationship between temperature and time?
+4. You now have charts for three different time intervals: month, season, and year. For each time interval, discuss what we can learn about patterns in temperature over time that we might not be able to learn from the charts of other time intervals.

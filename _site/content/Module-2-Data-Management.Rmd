@@ -1,0 +1,187 @@
+---
+title: "Module 2: Data Management"
+output: html_document
+---
+
+# Contents
+[2.1 Data transformation](#two-one) <br>
+[2.2 Importing and editing data from text files/documents](#two-two)<br>
+[2.3 Creating named ranges](#two-three)<br>
+[2.4 `IF()` statement](#two-four)<br>
+[2.5 The `COUNTIF()`, `COUNTIFS()`, `COUNT()`, `COUNTA()`, and `COUNTBLANK()` functions](#two-five)<br>
+[2.6 The `SUMIF()`, `AVERAGEIF()`, `SUMIFS()`, and `AVERAGEIFS()` functions](#two-six)<br>
+[2.7 Sorting](#two-seven)<br>
+[2.8 Filtering and removing duplicates](#two-eight)<br>
+[2.9 Lookup functions](#two-nine)
+
+---
+
+## 2.1 Data transformation {#two-one}
+In this lecture we shall cover: Data transformation: arithmetic operation- addition, subtraction, multiplication, log transformation, exponential, squaring and square root, indices. Along with these topics we shall also discuss copy-paste and transpose cells with an example as an extension/supplement to the earlier lecture.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RWCiPE5NzO8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Pastespecial.xlsx](Module-2-Data-Management/Pastespecial.xlsx) that is used in the video and practice.
+- Exercise:
+    - The [Mavs.xlsx](Module-2-Data-Management/Mavs.xlsx) file contains statistics for the great 2002–2003 Dallas Mavericks basketball team. Player names are listed in column A, statistical categories are listed in row 3, and statistical results are listed in rows 4–20. Change the worksheet so that all player names are listed in the same row and all statistical categories are listed in the same column.
+    - The [Productpaste.xlsx](Module-2-Data-Management/Productpaste.xlsx) file contains data on quarterly sales for four products. Copy this data to another range so that quarterly sales are read across instead of down. Link your copied data to the original data so that your computation of annual sales in the copied data range reflect changes entered in rows 5–8.
+    
+---
+    
+## 2.2 Importing and editing data from text files/documents.{#two-two}
+This lecture will focus on importing data from text files and editing text data to perform mathematical operations.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OsRHFUAn3vc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Lineupsch38.docx](Module-2-Data-Management/Lineupsch38.docx) that is used in the video and practice.
+- Exercise: The [Kingslineups.docx](Module-2-Data-Management/Kingslineups.docx) file contains performance ratings for some of the Sacramento Kings lineups. Import this data into Excel.
+
+---
+
+## 2.3 Creating named ranges.{#two-three}
+In this lecture video we shall talk about creating named ranges and operations on named ranges.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uRci9PnZQ7U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Historicalinvest.xlsx](Module-2-Data-Management/Historicalinvest.xlsx) that is used in the video and practice.
+- Exercise:
+    - Use the [States.xlsx](Module-2-Data-Management/States.xlsx) file to calculate the total sales in Arizona, California, Montana, New York, and New Jersey. Compute the total sales in a form such as AZ+CA+MT+NY+NJ instead of SUM(A21:A25).
+
+---
+    
+## 2.4 `IF()` statement {#two-four} 
+In this video we shall cover `IF()`, nested-`IF()`, and `AND()` functions.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8Wx5C_8LsKM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+This video is the second part explaining the use of `IF()` function. Here we will learn the use of `IF()` function in combination with some useful functions like `ROW()` and `MOD()`. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/inBN7VsJtN8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the files [Ifstatement.xlsx](Module-2-Data-Management/Ifstatement.xlsx) and [Toyrev.xlsx](Module-2-Data-Management/Toyrev.xlsx) used in the videos and practice.
+- Exercises:
+  - Some rows of column C of the [Problem28data.xlsx](Module-2-Data-Management/Problem28data.xlsx) file contain the word *and*. Create formulas in column D that place an X in a row of column D if and only if column C in that row contains the word *and*.
+  - The [Addresses.xlsx](Module-2-Data-Management/Addresses.xlsx) file gives people’s names on one line, their street address on the next line, and their city, state, and ZIP code on the following line. How could you put each person’s information on one line?
+  - A major drug company is trying to determine the correct plant capacity for a new drug. A unit of annual capacity can be built for a cost of $\$10$. Each unit of the drug sells for $\$12$ and incurs variable costs of $\$2$. The drug will be sold for 10 years. Develop a worksheet that computes the company’s 10-year profit, given the chosen annual capacity level and the annual demand for the drug. Assume demand for the drug is the same each year. You can ignore the time value of money in this problem.
+
+## 2.5 The `COUNTIF()`, `COUNTIFS()`, `COUNT()`, `COUNTA()`, and `COUNTBLANK()` functions.{#two-five}
+In the following two part videos we shall cover the use of the `COUNTIF()`, `COUNTIFS()`, `COUNT()`, `COUNTA()`, and `COUNTBLANK()` functions.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IN-aQLLs1N8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8liGWk0-_U8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Rock.xlsx](Module-2-Data-Management/Rock.xlsx) used in the video and practice.
+- Exercises:
+  - The following questions refer to the [Rock.xlsx](Module-2-Data-Management/Rock.xlsx) file:
+    1. How many songs were not sung by Britney Spears?
+    2. How many songs were played before June 15, 2004?
+    3. How many songs were played between June 1, 2004, and July 4, 2006? Hint: Take the     difference between two COUNTIF functions.
+    4. How many songs were sung by singers whose last names begin with *M*?
+    5. How many songs were sung by singers whose names contain an *e*?
+    6. Create a formula that always yields the number of songs played today. Hint: Use the TODAY() function.
+    7. For the D4:G15 cell range, count the cells containing a numeric value. Count the number of blank cells. Count the number of nonblank cells.
+    8. How many songs sung by Barry Manilow were played in 2004?
+    9. How many songs at least 4 minutes long and sung by Mandy Moore were played in 2007 or earlier?
+    10. How many songs exactly three minutes long and sung by Britney Spears were played later than 2004?
+    
+---
+
+## 2.6 The `SUMIF()`, `AVERAGEIF()`, `SUMIFS()`, and `AVERAGEIFS()` functions {#two-six}
+In the following two part lectures we shall talk about the SUMIF()`, `AVERAGEIF()`, `SUMIFS()`, and `AVERAGEIFS()` functions which are similar to the functions that we discussed in section 2.5 above. In addition we shall also discuss how to **remove duplicates** in data. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/spEXO9nUNIc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AB0CeDz04qY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Makeup2007.xlsx](Module-2-Data-Management/Makeup2007.xlsx) used in the videos and practice.
+- Exercises:
+  - The following questions refer to the [Makeup2007.xlsx](Module-2-Data-Management/Makeup2007.xlsx) file.
+  1. For each product, determine the total number of units and dollar volume sold.
+  2. Determine the total revenue earned before December 10, 2005.
+  3. Determine the total units sold by salespeople whose last names begin with C.
+  4. Determine the total revenue earned by people who have five letters in their names.
+  5. How many units were sold by people other than Colleen?
+  6. How many units of makeup were sold from January 15, 2004, through February 15, 2005?
+  7. The [NBA.xlsx](Module-2-Data-Management/NBA.xlsx) file contains the following information:
+    • Columns A and B list the name of each NBA team and a code number for each team. For example, team 1 is Atlanta and so on.
+    • Column C lists the home team for each game.
+    • Column D lists the visiting team for each game.
+    • Column E lists points scored by the home team.
+    • Column F lists points scored by the visiting team.
+      From this data, compute for each team the average number of points the team scored per game and the average number of points the team gave up.
+  8. The [Toysrus.xlsx](Module-2-Data-Management/Toysrus.xlsx) file contains sales revenue (in millions of dollars) during each quarter for the years 1997–2001 and the first two quarters of 2002. Use this data to compute a seasonal index for each quarter of the year. For example, if average sales during the first quarter were 80 percent of the overall average sales per quarter, the first quarter would have a seasonal index of 0.8.
+  9. The [Sumifrows.xlsx](Module-2-Data-Management/Sumifrows.xlsx) file contains sales data during several winter, spring, summer, and fall quarters. Determine average sales during the winter, spring, summer, and fall quarters.
+  10. Again, by using the [Makeup2007.xlsx](Module-2-Data-Management/Makeup2007.xlsx) file, determine how much revenue was made on sales transactions involving at least 50 units of makeup.
+  11. How many units of lip gloss did Cici sell in 2004?
+  12. What is the average number of units of foundation sold by Emilee?
+  13. What is the average dollar size of a foundation sale by Betsy after the end of 2004?
+  14. In transactions in which Ashley sold at least 40 units of lipstick, what is the total dollar amount?
+  15. Create a table that contains sales of each product by each person.
+  16. Create a table that, when you enter a year in your worksheet, contains sales of each product by a person during that year.
+  17. From the [Numbers.xlsx](Module-2-Data-Management/Numbers.xlsx) file, find the total of all numbers between 5 and 15, inclusive.
+  18. From the [Numbers.xlsx](Module-2-Data-Management/Numbers.xlsx) file, find the average of all numbers between 10 and 25, inclusive.
+
+---
+
+## 2.7 Sorting {#two-seven}
+In the following lectures we shall learn how to do multi-level (criteria) sorting, sorting with cell colour, and font colour. We shall also deal with sorting row values i.e. horizontal sorting.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Uj1nt7L6MlM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sihLtvXUmAY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download the file [Makeupsorttemp.xlsx](Module-2-Data-Management/Makeupsorttemp.xlsx) used in the videos and practice.
+- Exercises:
+  1. In the [Makeupsort.xlsx](Module-2-Data-Management/Makeupsort.xlsx) file, sort the sales data alphabetically by location and then by product type, name, date of sale, and units sold.
+  2. The [Sortday.xlsx](Module-2-Data-Management/Sortday.xlsx) file contains hours worked on different days of the week. Sort the data so that Monday data is followed by Tuesday data and so on.
+  3. The [Sorticons.xlsx](Module-2-Data-Management/Sorticons.xlsx) file contains annual investment returns with an up arrow used to indicate good years, a horizontal arrow used to indicate average years, and a red down arrow used to indicate bad years. Sort the data by the icons in the Stock column with up arrows on top, followed by horizontal arrows and then red down arrows.
+  4. The [Makeupsortfont.xlsx](Module-2-Data-Management/Makeupsortfont.xlsx) file contains your makeup data with certain dates shown in blue, red, or brown font. Sort the data so that brown dates are on top, followed by red dates and then blue dates
+
+---
+
+## 2.8 Filtering and removing duplicates {#two-eight}
+In the following videos we shall focus on filtering data and removing duplicate values in data.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NAkxo3MeAt4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/72d0rb9mJVU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download and use the [Makeupfilter.xlsx](Module-2-Data-Management/Makeupfilter.xlsx) file to practice.
+- Exercises:
+  - The following questions relate the [Makeupfilter.xlsx](Module-2-Data-Management/Makeupfilter.xlsx) file.
+  1. Find all transactions in which Hallagan sold eyeliner in the West region.
+  2. Find all transactions that rank in the top 5 percent with regard to units sold.
+  3. Find the top 20 revenue-generating transactions that involve foundation sales.
+  4. Find all transactions involving sales of at least 60 units during 2004 for which the per-unit price was a maximum of $3.10.
+  5. Find all foundation transactions during the first three months of 2004 for which the per-unit price was larger than the average price received for foundation during the entire period.
+  6. Find all transactions in which Zaret or Betsy sold either lipstick or foundation.
+  7. Find all unique combinations of product and salesperson’s name.
+  8. Find all the top 30 sales (by units) occurring in 2005 that involved lip gloss or mascara.
+  9. Find all sales by Jen between August 10 and September 15, 2005.
+  10. Find all sales of lipstick sold by Colleen for which the number of units sold is higher than the average number of units in a lipstick transaction.
+  11. Find all unique combinations of name, product, and location occurring during the first three months of 2006.
+  12. Find all records in which the product cell is colored yellow.
+
+---
+
+## 2.9 Lookup functions.{#two-nine}
+In this video we shall talk about the `VLOOKUP()` function.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dO0o9tVw38I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Download video practice file [Lookup.xlsx](Module-2-Data-Management/Lookup.xlsx)
+- Exercise:
+  - You are thinking of advertising Microsoft products on a sports telecast. As you buy more ads, the price of each ad decreases as shown in the following table:
+    ```{r, warning=FALSE, message=FALSE, echo=FALSE, fig.align='center'}
+library(tidyverse)
+data.frame(`Number of ads` = c("1-5", "6-10", "11-20", "21 and higher"),
+           `Price per ad` = c("$12,000","$11,000", "$10,000", "$9,000")) %>%
+  knitr::kable() %>% 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+    ```
+      
+    For example, if you buy 8 ads, you pay `$11,000` per ad, but if you buy 14 ads, you pay `$10,000` per ad. Write a formula that yields the total cost of purchasing any number of ads.
+  
+  - The [Lookupmultiplecolumns.xlsx](Module-2-Data-Management/Lookupmultiplecolumns.xlsx) file contains information about several sales made at an electronics store. A salesperson’s name will be entered in B17. Write an Excel formula that can be copied from C17 to D17:F17 that extracts each salesperson’s radio sales to C17, TV sales to D17, printer sales to E17, and CD sales to F17.
+
