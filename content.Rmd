@@ -11,7 +11,7 @@ output: html_document
 
 ---
 
-### [1. Basics of Excel](content/Module-1-BasicsOfExcel.html){target="_blank"}
+### [1. Introduction](content/1-Introduction.html){target="_blank"}
 ### [2. Data Management](content/Module-2-Data-Management.html){target="_blank"}
 ### [3. Descriptive Statistics](content/Module-3-Descriptive-Stats.html){target="_blank"}
 ### [4. Optimisation](content/Module-4-Optimisation.html){target="_blank"}

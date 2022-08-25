@@ -13,7 +13,8 @@
 
 <title>Lecture Materials</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -59,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -79,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -136,11 +141,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -231,7 +240,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -261,23 +270,53 @@ $(document).ready(function () {
 
 
 <hr />
-<div style="float: left; width: 45%;">
-<h2 id="excel">Excel</h2>
+<div id="excel" class="section level2" style="float: left; width: 45%;">
+<h2>Excel</h2>
 <hr />
-<h3 id="basics-of-excel"><a href="content/Module-1-BasicsOfExcel.html" target="_blank">1. Basics of Excel</a></h3>
-<h3 id="data-management"><a href="content/Module-2-Data-Management.html" target="_blank">2. Data Management</a></h3>
-<h3 id="descriptive-statistics"><a href="content/Module-3-Descriptive-Stats.html" target="_blank">3. Descriptive Statistics</a></h3>
-<h3 id="optimisation"><a href="content/Module-4-Optimisation.html" target="_blank">4. Optimisation</a></h3>
-<h3 id="graphical-presentation-of-data"><a href="content/Module-5-GraphicalPresentationOfData.html" target="_blank">5. Graphical Presentation of Data</a></h3>
-<h3 id="empirical-project-1"><a href="content/Module-6-Empirical-Project-1.html" target="_blank">6. Empirical Project 1</a></h3>
+<div id="introduction" class="section level3">
+<h3><a href="content/1-Introduction.html" target="_blank">1.
+Introduction</a></h3>
 </div>
-<div style="float: right; width: 45%;">
-<h2 id="r">R</h2>
+<div id="data-management" class="section level3">
+<h3><a href="content/Module-2-Data-Management.html" target="_blank">2.
+Data Management</a></h3>
+</div>
+<div id="descriptive-statistics" class="section level3">
+<h3><a href="content/Module-3-Descriptive-Stats.html" target="_blank">3.
+Descriptive Statistics</a></h3>
+</div>
+<div id="optimisation" class="section level3">
+<h3><a href="content/Module-4-Optimisation.html" target="_blank">4.
+Optimisation</a></h3>
+</div>
+<div id="graphical-presentation-of-data" class="section level3">
+<h3><a href="content/Module-5-GraphicalPresentationOfData.html"
+target="_blank">5. Graphical Presentation of Data</a></h3>
+</div>
+<div id="empirical-project-1" class="section level3">
+<h3><a href="content/Module-6-Empirical-Project-1.html"
+target="_blank">6. Empirical Project 1</a></h3>
+</div>
+</div>
+<div id="r" class="section level2" style="float: right; width: 45%;">
+<h2>R</h2>
 <hr />
-<h3 id="introduction"><a href="content/Introduction.html" target="_blank">1. Introduction</a></h3>
-<h3 id="tidyverse"><a href="content/Tidyverse.html" target="_blank">2. Tidyverse</a></h3>
-<h3 id="regression"><a href="content/Regression.html" target="_blank">3. Regression</a></h3>
-<h3 id="diagnostics"><a href="content/Diagnostics.html" target="_blank">4. Diagnostics</a></h3>
+<div id="introduction-1" class="section level3">
+<h3><a href="content/Introduction.html" target="_blank">1.
+Introduction</a></h3>
+</div>
+<div id="tidyverse" class="section level3">
+<h3><a href="content/Tidyverse.html" target="_blank">2.
+Tidyverse</a></h3>
+</div>
+<div id="regression" class="section level3">
+<h3><a href="content/Regression.html" target="_blank">3.
+Regression</a></h3>
+</div>
+<div id="diagnostics" class="section level3">
+<h3><a href="content/Diagnostics.html" target="_blank">4.
+Diagnostics</a></h3>
+</div>
 </div>
 
 

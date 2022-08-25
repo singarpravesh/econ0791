@@ -1,0 +1,38 @@
+---
+title: "Module 1: Introduction to Excel and Basic Charts"
+author: "pravesh"
+output: 
+  ioslides_presentation:
+    logo: logo.png
+    transition: slower
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Basic Concepts
+
+- Start up Excel
+- Adding the **Data Analysis Toolpak**
+- Excel Elements
+
+![](1-Introduction/ExcelElements.JPG)
+
+
+## Entering Formulas
+
+- Click inside the formula bar
+- Type in an "=" sign and type in your formula or click on the $fx$ symbol to choose from the drop down menu.
+- Symbols used in Excel functions
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+tibble(Operator = c('\\+', '\\-', "/", "\\*", "\\^"),
+       Description = c("Addition",
+                       "Subtraction", 
+                       "Division",
+                       "Multiplication",
+                       "Exponentiation")) %>%   kableExtra::kable() %>% 
+  kableExtra::kable_styling()
+```
+
