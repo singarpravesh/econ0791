@@ -3,4 +3,4 @@ title: "Applied Econometrics"
 output: html_document
 ---
 
-This course will deal with data management and introductory econometrics with MS-Excel and R.
+This course will deal with data management and introductory econometrics in R.
