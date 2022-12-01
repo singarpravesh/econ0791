@@ -395,15 +395,15 @@
 <h2>Problem Statement</h2>
 <p>The superintendent of an elementary school district must decide whether to hire additional teachers and she wants your advice. If she hires the teachers, she will reduce the number of students per teacher (the student–teacher ratio) by two. She faces a trade-off. Parents want smaller classes so that their children can receive more individualized attention. But hiring more teachers means spending more money, which is not to the liking of those paying the bill! So she asks you: If she cuts class sizes, what will the effect be on student performance?</p>
 </section>
-<section class="slide level2">
-
+<section id="section" class="slide level2 smaller">
+<h2></h2>
 <ul>
 <li>For a sample of <span class="math inline">\(n\)</span> districts, we can write <span class="math display">\[
 \text{TestScore} = \beta_0 + \beta_1\text{ClassSize}+ \\ \text{Other factors that infulence student-teacher ratio}
 \]</span></li>
 </ul>
 <p><span class="math display">\[
-testscr = \beta_0 + \beta_1str+ u
+y = \beta_0 + \beta_1x+ u
 \]</span></p>
 </section>
 <section class="slide level2">
@@ -1717,28 +1717,35 @@ testscr = \beta_0 + \beta_1str+ u
 </ul></li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="section-1" class="slide level2 smaller">
+<h2></h2>
 <ul>
-<li><strong>Task:</strong> Summarize the Distribution of Student–teacher Ratios and Sixth-Grade test Scores for 420 K–6 Districts in California in 1998-99.</li>
+<li><strong>Task:</strong> Summarize the Distribution of Student–teacher Ratios and 5th-Grade test Scores for 420 Districts in California in 1998-99. <em>This is Table 4.1 in the book. Page no 161.</em></li>
 </ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  variables Average `Standard Deviation` `Percentile 10%` `Percentile 25%`
-  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-1 str          19.2                 1.91             16.7             17.8
-2 testscr     340.                  6.57            331.             334. </code></pre>
+<pre><code># A tibble: 2 × 7
+  variables Average `Standard Deviation` `Percentile 10%` Perce…¹ Median Perce…²
+  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1 str          19.6                 1.89             17.3    18.6   19.7    20.9
+2 testscr     335.                  8.60            324.    329.   334.    340. 
+# … with abbreviated variable names ¹​`Percentile 25%`, ²​`Percentile 75%`</code></pre>
 </div>
 </div>
+<ul>
+<li>Observations:
+<ul>
+<li>10% of districts have student-teacher ratio below 17.3.</li>
+<li>50% of the districts have student-teacher ratio below 19.7.</li>
+</ul></li>
+</ul>
 </section>
 <section class="slide level2">
 
 <ul>
 <li>Steps:
 <ol type="1">
-<li>Find the categories or levels of the variables <code>grades</code>.</li>
-<li>Sample the 6th graders and create new variables <code>str</code> and <code>testscr</code>.</li>
+<li>Create new variables <code>str</code> and <code>testscr</code>.</li>
 <li>Tidy the data into long format using the variables <code>str</code> and <code>testscr</code>, and then group them and summarize. You can use <code>sd()</code> for standard deviation, <code>quantile()</code> for percentiles, and <code>mean()</code> for average.</li>
 </ol></li>
 </ul>
@@ -1746,49 +1753,32 @@ testscr = \beta_0 + \beta_1str+ u
 <section class="slide level2">
 
 <ol type="1">
-<li>Categories of <code>grades</code>.</li>
+<li>Create new variables <code>str</code> and <code>testscr</code>.</li>
 </ol>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Categories of `grades`.</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">levels</span>(caschools<span class="sc">$</span>grades)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Create new variables "str" and "testscr".</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">mutate</span>(<span class="at">str =</span> students<span class="sc">/</span>teachers,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>         <span class="at">testscr =</span> (english<span class="sc">+</span>math)<span class="sc">/</span><span class="dv">2</span>) <span class="ot">-&gt;</span> caschools</span>
+<span id="cb6-5"><a href="#cb6-5"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "KK-06" "KK-08"</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<ol start="2" type="1">
-<li>Sample the 6th graders and create new variables <code>str</code> and <code>testscr</code>.</li>
-</ol>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># sample the 6th graders and create new variables "str" and "testscr".</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>caschools <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(grades <span class="sc">==</span> <span class="st">"KK-06"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">mutate</span>(<span class="at">str =</span> students<span class="sc">/</span>teachers,</span>
-<span id="cb8-5"><a href="#cb8-5"></a>         <span class="at">testscr =</span> (english<span class="sc">+</span>math)<span class="sc">/</span><span class="dv">2</span>) <span class="ot">-&gt;</span> caschools</span>
-<span id="cb8-6"><a href="#cb8-6"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 61 × 16
-   district school   county grades stude…¹ teach…² calwo…³ lunch compu…⁴ expen…⁵
-   &lt;chr&gt;    &lt;chr&gt;    &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 67306    Del Pas… Sacra… KK-06     2247   108      79.0  87.3       0   5036.
- 2 65961    Alisal … Monte… KK-06     7306   320.     17.0  88.0     742   4998.
- 3 67199    Perris … River… KK-06     4258   221      24.7  92.7     324   5093.
- 4 66142    Salinas… Monte… KK-06     9028   450.     14.0  69.9     669   5471.
- 5 67421    Robla E… Sacra… KK-06     2253   113.     43.5  84.6     196   5526.
- 6 67397    North S… Sacra… KK-06     5138   291.     58.8  85.0     560   5607.
- 7 66423    Anaheim… Orange KK-06    20927   954.     10.9  82.4    1048   4969.
- 8 68221    Nationa… San D… KK-06     6639   305.     26.8 100       505   5339.
- 9 70904    Roselan… Sonoma KK-06     1154    62.1    22.9  84.9     129   6056.
-10 67231    Romolan… River… KK-06     1358    65      14.8  80.9     178   4897.
-# … with 51 more rows, 6 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
+<pre><code># A tibble: 420 × 16
+   district school  county grades stude…¹ teach…² calwo…³  lunch compu…⁴ expen…⁵
+   &lt;chr&gt;    &lt;chr&gt;   &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 75119    Sunol … Alame… KK-08      195   10.9    0.510   2.04      67   6385.
+ 2 61499    Manzan… Butte  KK-08      240   11.1   15.4    47.9      101   5099.
+ 3 61549    Therma… Butte  KK-08     1550   82.9   55.0    76.3      169   5502.
+ 4 61457    Golden… Butte  KK-08      243   14     36.5    77.0       85   7102.
+ 5 61523    Palerm… Butte  KK-08     1335   71.5   33.1    78.4      171   5236.
+ 6 62042    Burrel… Fresno KK-08      137    6.40  12.3    87.0       25   5580.
+ 7 68536    Holt U… San J… KK-08      195   10     12.9    94.6       28   5253.
+ 8 63834    Vinela… Kern   KK-08      888   42.5   18.8   100         66   4566.
+ 9 62331    Orange… Fresno KK-08      379   19     32.2    93.1       35   5356.
+10 67306    Del Pa… Sacra… KK-06     2247  108     79.0    87.3        0   5036.
+# … with 410 more rows, 6 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
 #   read &lt;dbl&gt;, math &lt;dbl&gt;, str &lt;dbl&gt;, testscr &lt;dbl&gt;, and abbreviated variable
 #   names ¹​students, ²​teachers, ³​calworks, ⁴​computer, ⁵​expenditure</code></pre>
 </div>
@@ -1796,31 +1786,58 @@ testscr = \beta_0 + \beta_1str+ u
 </section>
 <section class="slide level2">
 
-<ol start="3" type="1">
-<li>Summarize</li>
+<ol start="2" type="1">
+<li>Tidy and Summarize</li>
 </ol>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># summarize</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>caschools <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(str, testscr), <span class="at">names_to =</span> <span class="st">"variables"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">group_by</span>(variables) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">summarise</span>(<span class="at">Average =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb10-6"><a href="#cb10-6"></a>            <span class="st">`</span><span class="at">Standard Deviation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(value),</span>
-<span id="cb10-7"><a href="#cb10-7"></a>            <span class="st">`</span><span class="at">Percentile 10%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.1</span>),</span>
-<span id="cb10-8"><a href="#cb10-8"></a>            <span class="st">`</span><span class="at">Percentile 25%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.25</span>),</span>
-<span id="cb10-9"><a href="#cb10-9"></a>            <span class="at">Median =</span> <span class="fu">quantile</span>(value, <span class="fl">0.5</span>),</span>
-<span id="cb10-10"><a href="#cb10-10"></a>            <span class="st">`</span><span class="at">Percentile 75%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># summarize</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(str, testscr), <span class="at">names_to =</span> <span class="st">"variables"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">group_by</span>(variables) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">summarise</span>(<span class="at">Average =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb8-6"><a href="#cb8-6"></a>            <span class="st">`</span><span class="at">Standard Deviation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(value),</span>
+<span id="cb8-7"><a href="#cb8-7"></a>            <span class="st">`</span><span class="at">Percentile 10%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.1</span>),</span>
+<span id="cb8-8"><a href="#cb8-8"></a>            <span class="st">`</span><span class="at">Percentile 25%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.25</span>),</span>
+<span id="cb8-9"><a href="#cb8-9"></a>            <span class="at">Median =</span> <span class="fu">quantile</span>(value, <span class="fl">0.5</span>),</span>
+<span id="cb8-10"><a href="#cb8-10"></a>            <span class="st">`</span><span class="at">Percentile 75%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
   variables Average `Standard Deviation` `Percentile 10%` Perce…¹ Median Perce…²
   &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 str          19.2                 1.91             16.7    17.8   19.3    20.4
-2 testscr     340.                  6.57            331.    334.   340.    345. 
+1 str          19.6                 1.89             17.3    18.6   19.7    20.9
+2 testscr     335.                  8.60            324.    329.   334.    340. 
 # … with abbreviated variable names ¹​`Percentile 25%`, ²​`Percentile 75%`</code></pre>
 </div>
+</div>
+</section>
+<section id="section-2" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li>How are the two variables <code>testscr</code> and <code>str</code> related? Hint:Use scatter plot and correlation coefficient.</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> str, <span class="at">y =</span> testscr))<span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Student-Teacher Ratio"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>       <span class="at">y =</span> <span class="st">"Test Scores"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>       <span class="at">title =</span> <span class="st">'Scatterplot of test Score vs. Student–teacher Ratio (California School District Data)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><ul>
+<li>The correlation coefficient is 0</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">cor</span>(caschools<span class="sc">$</span>str, caschools<span class="sc">$</span>testscr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="footer footer-default">
 
