@@ -1,0 +1,120 @@
+---
+title: "Linear Regression"
+format: 
+  revealjs:
+    warning: false
+    message: false
+    echo: true
+    scrollable: true
+    
+---
+
+## Problem Statement
+
+The superintendent of an elementary school district must decide whether to hire additional teachers and she wants your advice. If she hires the teachers, she will reduce the number of students per teacher (the student–teacher ratio) by two. She faces a trade-off. Parents want smaller classes so that their children can receive more individualized attention. But hiring more teachers means spending more money, which is not to the liking of those paying the bill! So she asks you: If she cuts class sizes, what will the effect be on student performance? 
+
+---
+
+- For a sample of $n$ districts, we can write
+$$
+\text{TestScore} = \beta_0 + \beta_1\text{ClassSize}+ \\ \text{Other factors that infulence student-teacher ratio} 
+$$
+
+$$
+testscr = \beta_0 + \beta_1str+ u
+$$
+
+---
+
+```{r}
+library(AER) 
+data(package = "AER")
+data('CASchools', package = "AER")
+CASchools
+```
+
+---
+
+```{r}
+library(tidyverse)
+as_tibble(CASchools) -> caschools
+caschools
+```
+
+## Estimating the coefficients
+
+- Data description
+  - Consists of class sizes and test scores in 1998-99 in 420 California districts.
+  - **Classes:** 6th and 8th grade students
+  - **Class size:** $\frac{\text{Number of students in the district}}{\text{Number of teachers in the district}}$ i.e. district wise student-teacher ratio.
+
+---
+
+- **Task:** Summarize the Distribution of Student–teacher Ratios and Sixth-Grade test Scores for 420 K–6 Districts in California in 1998-99.
+```{r}
+#| echo: false
+# create new variables "str" and "testscr".
+caschools %>% 
+  filter(grades == "KK-06") %>% 
+  mutate(str = students/teachers,
+         testscr = (english+math)/2) -> caschools
+
+# summary table 
+caschools %>% 
+  pivot_longer(cols = c(str, testscr), names_to = "variables", values_to = "value") %>% 
+  group_by(variables) %>% 
+  summarise(Average = mean(value),
+            `Standard Deviation` = sd(value),
+            `Percentile 10%` = quantile(value, 0.1),
+            `Percentile 25%` = quantile(value, 0.25)) 
+```
+
+
+---
+
+- Steps:
+  1. Find the categories or levels of the variables `grades`.
+  2. Sample the 6th graders and create new variables `str` and `testscr`.
+  3. Tidy the data into long format using the variables `str` and `testscr`, and then group them and summarize. You can use `sd()` for standard deviation, `quantile()` for percentiles, and `mean()` for average.
+  
+---
+
+1. Categories of `grades`.
+```{r}
+#| code-fold: true
+# Categories of `grades`.
+levels(caschools$grades)
+```
+
+---
+
+2. Sample the 6th graders and create new variables `str` and `testscr`.
+```{r}
+#| code-fold: true
+# sample the 6th graders and create new variables "str" and "testscr".
+caschools %>% 
+  filter(grades == "KK-06") %>% 
+  mutate(str = students/teachers,
+         testscr = (english+math)/2) -> caschools
+caschools
+```
+
+---
+
+3. Summarize
+```{r}
+#| code-fold: true
+# summarize
+caschools %>% 
+  pivot_longer(cols = c(str, testscr), names_to = "variables", values_to = "value") %>% 
+  group_by(variables) %>% 
+  summarise(Average = mean(value),
+            `Standard Deviation` = sd(value),
+            `Percentile 10%` = quantile(value, 0.1),
+            `Percentile 25%` = quantile(value, 0.25),
+            Median = quantile(value, 0.5),
+            `Percentile 75%` = quantile(value, 0.75))
+```
+
+  
+

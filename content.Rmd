@@ -10,7 +10,7 @@ output: html_document
 
 ### [1. Introduction](content/Introduction.html){target="_blank"}
 ### [2. Tidyverse](content/Tidyverse.html){target="_blank"}
-### [3. Regression](content/Regression.html){target="_blank"}
+### [3. Regression](content/LinearRegression.html){target="_blank"}
 ### [4. Diagnostics](content/Diagnostics.html){target="_blank"}
 
 

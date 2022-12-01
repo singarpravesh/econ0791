@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="LinearRegression_files/libs/clipboard/clipboard.min.js"></script>
+<script src="LinearRegression_files/libs/quarto-html/tabby.min.js"></script>
+<script src="LinearRegression_files/libs/quarto-html/popper.min.js"></script>
+<script src="LinearRegression_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="LinearRegression_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="LinearRegression_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="LinearRegression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.251">
+
+  <title>Linear Regression</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="LinearRegression_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="LinearRegression_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="LinearRegression_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="LinearRegression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="LinearRegression_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="LinearRegression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="LinearRegression_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Linear Regression</h1>
+</section>
+
+<section id="problem-statement" class="slide level2">
+<h2>Problem Statement</h2>
+<p>The superintendent of an elementary school district must decide whether to hire additional teachers and she wants your advice. If she hires the teachers, she will reduce the number of students per teacher (the student–teacher ratio) by two. She faces a trade-off. Parents want smaller classes so that their children can receive more individualized attention. But hiring more teachers means spending more money, which is not to the liking of those paying the bill! So she asks you: If she cuts class sizes, what will the effect be on student performance?</p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>For a sample of <span class="math inline">\(n\)</span> districts, we can write <span class="math display">\[
+\text{TestScore} = \beta_0 + \beta_1\text{ClassSize}+ \\ \text{Other factors that infulence student-teacher ratio}
+\]</span></li>
+</ul>
+<p><span class="math display">\[
+testscr = \beta_0 + \beta_1str+ u
+\]</span></p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(AER) </span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">"AER"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">data</span>(<span class="st">'CASchools'</span>, <span class="at">package =</span> <span class="st">"AER"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>CASchools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    district                                  school          county grades
+1      75119                      Sunol Glen Unified         Alameda  KK-08
+2      61499                    Manzanita Elementary           Butte  KK-08
+3      61549             Thermalito Union Elementary           Butte  KK-08
+4      61457         Golden Feather Union Elementary           Butte  KK-08
+5      61523                Palermo Union Elementary           Butte  KK-08
+6      62042                 Burrel Union Elementary          Fresno  KK-08
+7      68536                   Holt Union Elementary     San Joaquin  KK-08
+8      63834                     Vineland Elementary            Kern  KK-08
+9      62331                Orange Center Elementary          Fresno  KK-08
+10     67306             Del Paso Heights Elementary      Sacramento  KK-06
+11     65722               Le Grand Union Elementary          Merced  KK-08
+12     62174                  West Fresno Elementary          Fresno  KK-08
+13     71795                  Allensworth Elementary          Tulare  KK-08
+14     72181              Sunnyside Union Elementary          Tulare  KK-08
+15     72298                    Woodville Elementary          Tulare  KK-08
+16     72041                 Pixley Union Elementary          Tulare  KK-08
+17     63594             Lost Hills Union Elementary            Kern  KK-08
+18     63370           Buttonwillow Union Elementary            Kern  KK-08
+19     64709                       Lennox Elementary     Los Angeles  KK-08
+20     63560                       Lamont Elementary            Kern  KK-08
+21     63230            Westmorland Union Elementary        Imperial  KK-08
+22     72058                Pleasant View Elementary          Tulare  KK-08
+23     63842                  Wasco Union Elementary            Kern  KK-08
+24     71811                   Alta Vista Elementary          Tulare  KK-08
+25     65748             Livingston Union Elementary          Merced  KK-08
+26     72272               Woodlake Union Elementary          Tulare  KK-08
+27     65961                 Alisal Union Elementary        Monterey  KK-06
+28     63313                  Arvin Union Elementary            Kern  KK-08
+29     72199            Terra Bella Union Elementary          Tulare  KK-08
+30     72215                       Tipton Elementary          Tulare  KK-08
+31     68379                   San Ysidro Elementary       San Diego  KK-08
+32     75440                         Soledad Unified        Monterey  KK-08
+33     64816                Mountain View Elementary     Los Angeles  KK-08
+34     66050              King City Union Elementary        Monterey  KK-08
+35     67819            Ontario-Montclair Elementary  San Bernardino  KK-08
+36     64758                   Los Nietos Elementary     Los Angeles  KK-08
+37     65870                       Winton Elementary          Merced  KK-08
+38     62380                  Raisin City Elementary          Fresno  KK-08
+39     68999              Ravenswood City Elementary       San Mateo  KK-08
+40     63578         Richland-Lerdo Union Elementary            Kern  KK-08
+41     72538                       Oxnard Elementary         Ventura  KK-08
+42     65680                      El Nido Elementary          Merced  KK-08
+43     63461                      Fairfax Elementary            Kern  KK-08
+44     63404                 Delano Union Elementary            Kern  KK-08
+45     67199                       Perris Elementary       Riverside  KK-06
+46     65078                  Valle Lindo Elementary     Los Angeles  KK-08
+47     69369              Alum Rock Union Elementary     Santa Clara  KK-08
+48     63438                       Edison Elementary            Kern  KK-08
+49     63321             Bakersfield City Elementary            Kern  KK-08
+50     69450            Franklin-McKinley Elementary     Santa Clara  KK-08
+51     64592                    Hawthorne Elementary     Los Angeles  KK-08
+52     65193                   Chowchilla Elementary          Madera  KK-08
+53     66142                 Salinas City Elementary        Monterey  KK-06
+54     69120           Santa Maria-Bonita Elementary   Santa Barbara  KK-08
+55     65110                Whittier City Elementary     Los Angeles  KK-08
+56     64477               Eastside Union Elementary     Los Angeles  KK-08
+57     64691                     Lawndale Elementary     Los Angeles  KK-08
+58     67421                        Robla Elementary      Sacramento  KK-06
+59     66191             Santa Rita Union Elementary        Monterey  KK-08
+60     72561                          Rio Elementary         Ventura  KK-08
+61     72157             Strathmore Union Elementary          Tulare  KK-08
+62     67397             North Sacramento Elementary      Sacramento  KK-06
+63     66423                      Anaheim Elementary          Orange  KK-06
+64     63974                Lemoore Union Elementary           Kings  KK-08
+65     63875                 Armona Union Elementary           Kings  KK-08
+66     63339                    Beardsley Elementary            Kern  KK-08
+67     65037               South Whittier Elementary     Los Angeles  KK-08
+68     63917                      Hanford Elementary           Kings  KK-08
+69     68221                     National Elementary       San Diego  KK-06
+70     70904                     Roseland Elementary          Sonoma  KK-06
+71     63420                   Di Giorgio Elementary            Kern  KK-08
+72     64642                 Keppel Union Elementary     Los Angeles  KK-08
+73     63966               Lakeside Union Elementary           Kings  KK-08
+74     65771                  Merced City Elementary          Merced  KK-08
+75     69203              Guadalupe Union Elementary   Santa Barbara  KK-08
+76     67694                    Cucamonga Elementary  San Bernardino  KK-08
+77     61705                    Knightsen Elementary    Contra Costa  KK-08
+78     63008                     Rio Dell Elementary        Humboldt  KK-08
+79     70417                     Montague Elementary        Siskiyou  KK-08
+80     70409                McCloud Union Elementary        Siskiyou  KK-08
+81     72587                  Santa Paula Elementary         Ventura  KK-08
+82     62539                    West Park Elementary          Fresno  KK-08
+83     65631                      Atwater Elementary          Merced  KK-08
+84     65862                 Weaver Union Elementary          Merced  KK-08
+85     62356                Pacific Union Elementary          Fresno  KK-08
+86     75051                  Lucerne Valley Unified  San Bernardino  KK-08
+87     67231                     Romoland Elementary       Riverside  KK-06
+88     64501                El Monte City Elementary     Los Angeles  KK-08
+89     63503             Greenfield Union Elementary            Kern  KK-08
+90     72033             Palo Verde Union Elementary          Tulare  KK-08
+91     67322                Elverta Joint Elementary      Sacramento  KK-08
+92     64048                      Lucerne Elementary            Lake  KK-08
+93     69542               Luther Burbank Elementary     Santa Clara  KK-08
+94     61382                 Bangor Union Elementary           Butte  KK-08
+95     68858                     Bayshore Elementary       San Mateo  KK-08
+96     72017             Oak Valley Union Elementary          Tulare  KK-08
+97     65151                      Wilsona Elementary     Los Angeles  KK-08
+98     63073                      Brawley Elementary        Imperial  KK-08
+99     63198                Meadows Union Elementary        Imperial  KK-08
+100    64717             Little Lake City Elementary     Los Angeles  KK-08
+101    63719                   Pond Union Elementary            Kern  KK-08
+102    63800                    Taft City Elementary            Kern  KK-08
+103    71357                      Brittan Elementary          Sutter  KK-08
+104    65557                  Arena Union Elementary       Mendocino  KK-08
+105    67587                     Adelanto Elementary  San Bernardino  KK-08
+106    67470               Hollister School District      San Benito  KK-08
+107    64857                     Palmdale Elementary     Los Angeles  KK-08
+108    61507                Oroville City Elementary           Butte  KK-08
+109    63792                     Standard Elementary            Kern  KK-08
+110    72447                       Briggs Elementary         Ventura  KK-08
+111    62323                       Monroe Elementary          Fresno  KK-08
+112    64667                    Lancaster Elementary     Los Angeles  KK-08
+113    65177       Alview-Dairyland Union Elementary          Madera  KK-08
+114    66589                     Magnolia Elementary          Orange  KK-06
+115    71985                      Liberty Elementary          Tulare  KK-08
+116    69617                 Mt. Pleasant Elementary     Santa Clara  KK-08
+117    63123                    El Centro Elementary        Imperial  KK-08
+118    68395              South Bay Union Elementary       San Diego  KK-06
+119    69914                Cascade Union Elementary          Shasta  KK-08
+120    71969            Kings River Union Elementary          Tulare  KK-08
+121    71548                 Gerber Union Elementary          Tehama  KK-08
+122    71910                 Exeter Union Elementary          Tulare  KK-08
+123    62000               American Union Elementary          Fresno  KK-08
+124    66167            San Antonio Union Elementary        Monterey  KK-08
+125    71837                       Burton Elementary          Tulare  KK-08
+126    67157                 Nuview Union Elementary       Riverside  KK-08
+127    70615               Bellevue Union Elementary          Sonoma  KK-06
+128    64550                       Garvey Elementary     Los Angeles  KK-08
+129    71498                Corning Union Elementary          Tehama  KK-08
+130    68916                    Jefferson Elementary       San Mateo  KK-08
+131    70185            Big Springs Union Elementary        Siskiyou  KK-08
+132    63487              General Shafter Elementary            Kern  KK-08
+133    71308                Turlock Joint Elementary      Stanislaus  KK-08
+134    72421  Twain Harte-Long Barn Union Elementary        Tuolumne  KK-08
+135    69005                 Redwood City Elementary       San Mateo  KK-08
+136    61846                 Camino Union Elementary       El Dorado  KK-08
+137    65813             Plainsburg Union Elementary          Merced  KK-08
+138    68486                        Banta Elementary     San Joaquin  KK-08
+139    62513            Washington Colony Elementary          Fresno  KK-08
+140    67405              Rio Linda Union Elementary      Sacramento  KK-06
+141    71050                 Chatom Union Elementary      Stanislaus  KK-08
+142    73726           Merced River Union Elementary          Merced  KK-08
+143    72462                      Hueneme Elementary         Ventura  KK-08
+144    62737              Cuddeback Union Elementary        Humboldt  KK-08
+145    62703              Blue Lake Union Elementary        Humboldt  KK-08
+146    68205                  Lemon Grove Elementary       San Diego  KK-08
+147    64063             Upper Lake Union Elementary            Lake  KK-08
+148    62984              Peninsula Union Elementary        Humboldt  KK-08
+149    72512                   Ocean View Elementary         Ventura  KK-08
+150    71647                  Reeds Creek Elementary          Tehama  KK-08
+151    67280                 Arcohe Union Elementary      Sacramento  KK-08
+152    68627                New Jerusalem Elementary     San Joaquin  KK-08
+153    70243                     Dunsmuir Elementary        Siskiyou  KK-08
+154    71282             Stanislaus Union Elementary      Stanislaus  KK-08
+155    62240        Kingsburg Joint Union Elementary          Fresno  KK-08
+156    66456                   Buena Park Elementary          Orange  KK-08
+157    66746                  Westminster Elementary          Orange  KK-08
+158    63933                 Island Union Elementary           Kings  KK-08
+159    72231                  Tulare City Elementary          Tulare  KK-08
+160    68023                  Chula Vista Elementary       San Diego  KK-06
+161    69880            Black Butte Union Elementary          Shasta  KK-08
+162    65763                McSwain Union Elementary          Merced  KK-08
+163    71381                     Franklin Elementary          Sutter  KK-08
+164    68098              Escondido Union Elementary       San Diego  KK-08
+165    64485           East Whittier City Elementary     Los Angeles  KK-08
+166    73544      Rio Bravo-Greeley Union Elementary            Kern  KK-08
+167    71407        Marcum-Illinois Union Elementary          Sutter  KK-08
+168    68437                   Vallecitos Elementary       San Diego  KK-08
+169    67918                       Victor Elementary  San Bernardino  KK-06
+170    66696                      Savanna Elementary          Orange  KK-06
+171    71001              West Side Union Elementary          Sonoma  KK-06
+172    69971                   Enterprise Elementary          Shasta  KK-08
+173    71621              Red Bluff Union Elementary          Tehama  KK-08
+174    72363                    Jamestown Elementary        Tuolumne  KK-08
+175    70482                   Weed Union Elementary        Siskiyou  KK-08
+176    63032              South Bay Union Elementary        Humboldt  KK-06
+177    61655              Brentwood Union Elementary    Contra Costa  KK-08
+178    72405                  Summerville Elementary        Tuolumne  KK-08
+179    66860                        Ophir Elementary          Placer  KK-08
+180    70821                   Montgomery Elementary          Sonoma  KK-08
+181    70912                   Santa Rosa Elementary          Sonoma  KK-06
+182    71266                 Salida Union Elementary      Stanislaus  KK-08
+183    70128                 Shasta Union Elementary          Shasta  KK-08
+184    62802                Fortuna Union Elementary        Humboldt  KK-08
+185    72090                    Rockford  Elementary          Tulare  KK-08
+186    62638                        Plaza Elementary           Glenn  KK-08
+187    70813              Monte Rio Union Elementary          Sonoma  KK-08
+188    64105             Janesville Union Elementary          Lassen  KK-08
+189    63172               Magnolia Union Elementary        Imperial  KK-08
+190    64188                Shaffer Union Elementary          Lassen  KK-08
+191    66506                    Fullerton Elementary          Orange  KK-08
+192    70649                     Cinnabar Elementary          Sonoma  KK-06
+193    69278                Santa Barbara Elementary   Santa Barbara  KK-08
+194    63016                  Rohnerville Elementary        Humboldt  KK-08
+195    71431   Pleasant Grove Joint Union Elementary          Sutter  KK-08
+196    73700               Mountain Union Elementary          Shasta  KK-08
+197    63784             South Fork Union Elementary            Kern  KK-08
+198    68155          Jamul-Dulzura Union Elementary       San Diego  KK-08
+199    69765                     Live Oak Elementary      Santa Cruz  KK-08
+200    67116                Menifee Union Elementary       Riverside  KK-08
+201    63552               Lakeside Union Elementary            Kern  KK-08
+202    69724                      Whisman Elementary     Santa Clara  KK-08
+203    63180                 McCabe Union Elementary        Imperial  KK-08
+204    68551                 Lammersville Elementary     San Joaquin  KK-08
+205    71563            Lassen View Union Elementary          Tehama  KK-08
+206    62927                 Loleta Union Elementary        Humboldt  KK-08
+207    70045                     Junction Elementary          Shasta  KK-08
+208    64931                     Rosemead Elementary     Los Angeles  KK-08
+209    66332                 Grass Valley Elementary          Nevada  KK-08
+210    71829                  Buena Vista Elementary          Tulare  KK-08
+211    63545              Kernville Union Elementary            Kern  KK-08
+212    67348             Galt Joint Union Elementary      Sacramento  KK-08
+213    67553                    Southside Elementary      San Benito  KK-08
+214    68189               Lakeside Union Elementary       San Diego  KK-08
+215    71423                      Nuestro Elementary          Sutter  KK-08
+216    61994                       Alvina Elementary          Fresno  KK-08
+217    61762                 Oakley Union Elementary    Contra Costa  KK-08
+218    70268                   Etna Union Elementary        Siskiyou  KK-06
+219    68544                    Jefferson Elementary     San Joaquin  KK-08
+220    69377              Berryessa Union Elementary     Santa Clara  KK-08
+221    63958             Kit Carson Union Elementary           Kings  KK-08
+222    71290                 Sylvan Union Elementary      Stanislaus  KK-08
+223    68635               Oak View Union Elementary     San Joaquin  KK-08
+224    66787                 Auburn Union Elementary          Placer  KK-08
+225    67504     North County Joint Union Elementary      San Benito  KK-08
+226    61945                Pioneer Union Elementary       El Dorado  KK-08
+227    67645                      Central Elementary  San Bernardino  KK-08
+228    70094                Pacheco Union Elementary          Shasta  KK-08
+229    66316                 Chicago Park Elementary          Nevada  KK-08
+230    68874                     Brisbane Elementary       San Mateo  KK-08
+231    63883                Central Union Elementary           Kings  KK-08
+232    70011           Happy Valley Union Elementary          Shasta  KK-08
+233    61572             Mark Twain Union Elementary       Calaveras  KK-08
+234    65458              San Rafael City Elementary           Marin  KK-08
+235    67991           Cajon Valley Union Elementary       San Diego  KK-08
+236    69393               Campbell Union Elementary     Santa Clara  KK-08
+237    71365                       Browns Elementary          Sutter  KK-08
+238    66324                  Clear Creek Elementary          Nevada  KK-08
+239    63057               Trinidad Union Elementary        Humboldt  KK-08
+240    70722                  Guerneville Elementary          Sonoma  KK-08
+241    69013               San Bruno Park Elementary       San Mateo  KK-08
+242    71472                     Antelope Elementary          Tehama  KK-08
+243    66472                    Centralia Elementary          Orange  KK-06
+244    67702                     Etiwanda Elementary  San Bernardino  KK-08
+245    65169                     Wiseburn Elementary     Los Angeles  KK-08
+246    63024                 Scotia Union Elementary        Humboldt  KK-08
+247    67785                Mountain View Elementary  San Bernardino  KK-08
+248    68791  Pleasant Valley Joint Union Elementary San Luis Obispo  KK-06
+249    69625                    Oak Grove Elementary     Santa Clara  KK-08
+250    61960                Pollock Pines Elementary       El Dorado  KK-08
+251    64345                Castaic Union Elementary     Los Angeles  KK-08
+252    63255                 Bishop Union Elementary            Inyo  KK-08
+253    69138               Buellton Union Elementary   Santa Barbara  KK-08
+254    75135               Chawanakee Jt. Elementary          Madera  KK-08
+255    70508                  Yreka Union Elementary        Siskiyou  KK-08
+256    70599       Alexander Valley Union Elementary          Sonoma  KK-06
+257    66415                  Twin Ridges Elementary          Nevada  KK-08
+258    72173                Sundale Union Elementary          Tulare  KK-08
+259    72207           Three Rivers Union Elementary          Tulare  KK-08
+260    72348               Columbia Union Elementary        Tuolumne  KK-08
+261    65102               Westside Union Elementary     Los Angeles  KK-08
+262    65649              Ballico-Cressey Elementary          Merced  KK-08
+263    68973                     Millbrae Elementary       San Mateo  KK-08
+264    69435                    Evergreen Elementary     Santa Clara  KK-08
+265    70730                Harmony Union Elementary          Sonoma  KK-08
+266    63362     Panama Buena Vista Union Elementary            Kern  KK-08
+267    68932          Laguna Salada Union Elementary       San Mateo  KK-08
+268    72371                       Sonora Elementary        Tuolumne  KK-08
+269    66910               Roseville City Elementary          Placer  KK-08
+270    71084                      Gratton Elementary      Stanislaus  KK-08
+271    64196                   Susanville Elementary          Lassen  KK-08
+272    69872                  Bella Vista Elementary          Shasta  KK-08
+273    71852                    Columbine Elementary          Tulare  KK-08
+274    64626 Hughes-Elizabeth Lakes Union Elementary     Los Angeles  KK-08
+275    69591                Mountain View Elementary     Santa Clara  KK-08
+276    65045        Sulphur Springs Union Elementary     Los Angeles  KK-06
+277    70680            Forestville Union Elementary          Sonoma  KK-08
+278    63750               Rosedale Union Elementary            Kern  KK-08
+279    69948                     Columbia Elementary          Shasta  KK-08
+280    66795                       Colfax Elementary          Placer  KK-08
+281    70425             Mt. Shasta Union Elementary        Siskiyou  KK-08
+282    70870           Piner-Olivet Union Elementary          Sonoma  KK-06
+283    65185              Bass Lake Joint Elementary          Madera  KK-08
+284    62745                       Cutten Elementary        Humboldt  KK-06
+285    61952            Placerville Union Elementary       El Dorado  KK-08
+286    71035                       Wright Elementary          Sonoma  KK-06
+287    71522              Evergreen Union Elementary          Tehama  KK-08
+288    70847              Old Adobe Union Elementary          Sonoma  KK-06
+289    71019                 Wilmar Union Elementary          Sonoma  KK-06
+290    66761                     Ackerman Elementary          Placer  KK-08
+291    69815              Santa Cruz City Elementary      Santa Cruz  KK-06
+292    62679                       Arcata Elementary        Humboldt  KK-08
+293    67595                    Alta Loma Elementary  San Bernardino  KK-08
+294    66837             Foresthill Union Elementary          Placer  KK-08
+295    61929            Mother Lode Union Elementary       El Dorado  KK-08
+296    66613                   Ocean View Elementary          Orange  KK-08
+297    62596                         Lake Elementary           Glenn  KK-08
+298    69039        San Mateo-Foster City Elementary       San Mateo  KK-08
+299    69195                 Goleta Union Elementary   Santa Barbara  KK-06
+300    67736                    Helendale Elementary  San Bernardino  KK-08
+301    70854                Petaluma City Elementary          Sonoma  KK-06
+302    69690                    Sunnyvale Elementary     Santa Clara  KK-08
+303    69179                      College Elementary   Santa Barbara  KK-08
+304    68197                   La Mesa-Spring Valley       San Diego  KK-08
+305    66530        Huntington Beach City Elementary          Orange  KK-08
+306    69336                      Solvang Elementary   Santa Barbara  KK-08
+307    69849                       Soquel Elementary      Santa Cruz  KK-08
+308    62554            Capay Joint Union Elementary           Glenn  KK-08
+309    70714            Gravenstein Union Elementary          Sonoma  KK-08
+310    66381              Pleasant Valley Elementary          Nevada  KK-08
+311    63990                Pioneer Union Elementary           Kings  KK-08
+312    68361                       Santee Elementary       San Diego  KK-08
+313    64113                Johnstonville Elementary          Lassen  KK-08
+314    72553              Pleasant Valley Elementary         Ventura  KK-08
+315    72355                 Curtis Creek Elementary        Tuolumne  KK-08
+316    70300             Fort Jones Union Elementary        Siskiyou  KK-06
+317    70805              Mark West Union Elementary          Sonoma  KK-06
+318    67967                 Alpine Union Elementary       San Diego  KK-08
+319    70938             Sebastopol Union Elementary          Sonoma  KK-08
+320    62828                   Freshwater Elementary        Humboldt  KK-06
+321    63693                       Norris Elementary            Kern  KK-08
+322    72132            Springville Union Elementary          Tulare  KK-08
+323    69575                     Moreland Elementary     Santa Clara  KK-08
+324    63610                        Maple Elementary            Kern  KK-08
+325    63941   Kings River-Hardwick Union Elementary           Kings  KK-08
+326    68163                 Julian Union Elementary       San Diego  KK-08
+327    68007                      Cardiff Elementary       San Diego  KK-06
+328    72108                    Saucelito Elementary          Tulare  KK-08
+329    67975                Bonsall Union Elementary       San Diego  KK-08
+330    66480                      Cypress Elementary          Orange  KK-06
+331    64766                 Lowell Joint Elementary     Los Angeles  KK-08
+332    64832                      Newhall Elementary     Los Angeles  KK-06
+333    65359                    Lagunitas Elementary           Marin  KK-08
+334    69385                     Cambrian Elementary     Santa Clara  KK-08
+335    71654                    Richfield Elementary          Tehama  KK-08
+336    62794                   Fieldbrook Elementary        Humboldt  KK-08
+337    68049                       Dehesa Elementary       San Diego  KK-06
+338    69955             Cottonwood Union Elementary          Shasta  KK-08
+339    63479                    Fruitvale Elementary            Kern  KK-08
+340    69708                        Union Elementary     Santa Clara  KK-08
+341    66498              Fountain Valley Elementary          Orange  KK-08
+342    61879               Gold Oak Union Elementary       El Dorado  KK-08
+343    61838                Buckeye Union Elementary       El Dorado  KK-08
+344    75085                         Rocklin Unified          Placer  KK-08
+345    61887             Gold Trail Union Elementary       El Dorado  KK-08
+346    62885                   Hydesville Elementary        Humboldt  KK-08
+347    64998                 Saugus Union Elementary     Los Angeles  KK-06
+348    66845                 Loomis Union Elementary          Placer  KK-08
+349    66886           Placer Hills Union Elementary          Placer  KK-08
+350    70672                       Dunham Elementary          Sonoma  KK-06
+351    69021                   San Carlos Elementary       San Mateo  KK-08
+352    66399          Ready Springs Union Elementary          Nevada  KK-08
+353    65219             Coarsegold Union Elementary          Madera  KK-08
+354    68726                      Cayucos Elementary San Luis Obispo  KK-08
+355    64170                     Richmond Elementary          Lassen  KK-08
+356    62109                   Clay Joint Elementary          Fresno  KK-08
+357    70995                        Waugh Elementary          Sonoma  KK-06
+358    70979               Two Rock Union Elementary          Sonoma  KK-06
+359    68866       Belmont-Redwood Shores Elementary       San Mateo  KK-08
+360    61978                 Rescue Union Elementary       El Dorado  KK-08
+361    66779        Alta-Dutch Flat Union Elementary          Placer  KK-08
+362    68353            San Pasqual Union Elementary       San Diego  KK-08
+363    61911                      Latrobe Elementary       El Dorado  KK-08
+364    66407                   Union Hill Elementary          Nevada  KK-08
+365    70961             Twin Hills Union Elementary          Sonoma  KK-08
+366    62976                Pacific Union Elementary        Humboldt  KK-08
+367    71696                 Douglas City Elementary         Trinity  KK-08
+368    66373         Pleasant Ridge Union Elementary          Nevada  KK-08
+369    66852                    Newcastle Elementary          Placer  KK-08
+370    72470                   Mesa Union Elementary         Ventura  KK-08
+371    71787                  Weaverville Elementary         Trinity  KK-08
+372    70078              North Cow Creek Elementary          Shasta  KK-08
+373    66340                  Nevada City Elementary          Nevada  KK-08
+374    62893                 Jacoby Creek Elementary        Humboldt  KK-08
+375    70698                    Fort Ross Elementary          Sonoma  KK-08
+376    68080              Encinitas Union Elementary       San Diego  KK-06
+377    65318                        Dixie Elementary           Marin  KK-08
+378    69492               Lakeside Joint Elementary     Santa Clara  KK-06
+379    64600           Hermosa Beach City Elementary     Los Angeles  KK-08
+380    70896          Rincon Valley Union Elementary          Sonoma  KK-06
+381    66233             Washington Union Elementary        Monterey  KK-08
+382    70623         Bennett Valley Union Elementary          Sonoma  KK-06
+383    69500          Loma Prieta Joint Union Elemen     Santa Clara  KK-08
+384    70789                      Kenwood Elementary          Sonoma  KK-06
+385    70797                      Liberty Elementary          Sonoma  KK-06
+386    71142                Knights Ferry Elementary      Stanislaus  KK-08
+387    65334                    Kentfield Elementary           Marin  KK-08
+388    69104                      Ballard Elementary   Santa Barbara  KK-06
+389    70839              Oak Grove Union Elementary          Sonoma  KK-08
+390    75002                  Ross Valley Elementary           Marin  KK-08
+391    69773                     Mountain Elementary      Santa Cruz  KK-06
+392    68882                   Burlingame Elementary       San Mateo  KK-08
+393    70003                        Grant Elementary          Shasta  KK-08
+394    69757                 Happy Valley Elementary      Santa Cruz  KK-06
+395    69732             Bonny Doon Union Elementary      Santa Cruz  KK-06
+396    61812                 Walnut Creek Elementary    Contra Costa  KK-08
+397    69211                         Hope Elementary   Santa Barbara  KK-06
+398    65367                     Larkspur Elementary           Marin  KK-08
+399    69419              Cupertino Union Elementary     Santa Clara  KK-08
+400    69781                      Pacific Elementary      Santa Cruz  KK-06
+401    69526              Los Gatos Union Elementary     Santa Clara  KK-08
+402    69252              Montecito Union Elementary   Santa Barbara  KK-06
+403    68387                 Solana Beach Elementary       San Diego  KK-06
+404    68965              Menlo Park City Elementary       San Mateo  KK-08
+405    65425                   Reed Union Elementary           Marin  KK-08
+406    65391                  Mill Valley Elementary           Marin  KK-08
+407    61713                    Lafayette Elementary    Contra Costa  KK-08
+408    68056                Del Mar Union Elementary       San Diego  KK-06
+409    69088                     Woodside Elementary       San Mateo  KK-08
+410    61747                       Moraga Elementary    Contra Costa  KK-08
+411    61770                 Orinda Union Elementary    Contra Costa  KK-08
+412    68908            Hillsborough City Elementary       San Mateo  KK-08
+413    69161                  Cold Spring Elementary   Santa Barbara  KK-06
+414    68981               Portola Valley Elementary       San Mateo  KK-08
+415    69682               Saratoga Union Elementary     Santa Clara  KK-08
+416    68957                  Las Lomitas Elementary       San Mateo  KK-08
+417    69518                    Los Altos Elementary     Santa Clara  KK-08
+418    72611                  Somis Union Elementary         Ventura  KK-08
+419    72744                       Plumas Elementary            Yuba  KK-08
+420    72751                    Wheatland Elementary            Yuba  KK-08
+    students  teachers calworks    lunch computer expenditure    income
+1        195   10.9000   0.5102   2.0408       67    6384.911 22.690001
+2        240   11.1500  15.4167  47.9167      101    5099.381  9.824000
+3       1550   82.9000  55.0323  76.3226      169    5501.955  8.978000
+4        243   14.0000  36.4754  77.0492       85    7101.831  8.978000
+5       1335   71.5000  33.1086  78.4270      171    5235.988  9.080333
+6        137    6.4000  12.3188  86.9565       25    5580.147 10.415000
+7        195   10.0000  12.9032  94.6237       28    5253.331  6.577000
+8        888   42.5000  18.8063 100.0000       66    4565.746  8.174000
+9        379   19.0000  32.1900  93.1398       35    5355.548  7.385000
+10      2247  108.0000  78.9942  87.3164        0    5036.211 11.613333
+11       446   21.0000  18.6099  85.8744       86    4547.692  8.931000
+12       987   47.0000  71.7131  98.6056       56    5447.345  7.385000
+13       103    5.0000  22.4299  98.1308       25    6567.149  5.335000
+14       487   24.3400  24.6094  77.1484        0    4818.613  8.279000
+15       649   36.0000  14.6379  76.2712       31    5621.456  9.630000
+16       852   42.0700  24.2142  94.2957       80    6026.360  7.454000
+17       491   28.9200  11.2016  97.7597      100    6723.238  6.216000
+18       421   25.5000   8.5511  77.9097       50    5589.885  7.764000
+19      6880  303.0300  21.2824  94.9712      960    5064.616  7.022000
+20      2688  135.0000  23.4375  93.2292      139    5433.593  5.699000
+21       440   24.0000  34.7727 100.0000       69    5725.563  7.941000
+22       475   21.0000  21.6495  91.5464       53    4542.105  9.630000
+23      2538  130.5000  18.9111  70.8167      169    5107.086  7.405000
+24       476   19.0000  43.8559 100.0000        0    4659.662  9.630000
+25      2357  114.0000  16.8010  90.6237      216    4555.464  8.019000
+26      1588   85.0000  22.4072  85.1472      198    5415.153  8.523000
+27      7306  319.8000  17.0015  88.0349      742    4997.872  7.983181
+28      2601  135.0000  15.0711  92.1953      269    5223.912  7.305000
+29       847   44.0000  16.2928  90.2007       67    5139.165  8.934000
+30       452   22.0000  14.4989  81.0235       55    4614.252  8.554000
+31      4142  201.0000  35.5625  81.5065      569    5342.233  6.613000
+32      2102   99.7500  15.3199  90.2849      224    5347.458 12.409000
+33     10012  464.9000  29.7639  91.5934      721    5036.459  8.126616
+34      2488  125.0000  12.6920  55.0930      202    5117.142 11.431000
+35     25151 1186.7000  17.4426  80.1956     1713    5117.040 11.722225
+36      2267  103.6800  19.1517  84.4338      177    5272.192 11.332500
+37      1657   90.4000  28.8473  84.7314      204    5225.719  9.598000
+38       284   17.5000  14.5270  94.9324       18    6516.533 14.558000
+39      5370  280.0000  19.5717  81.1173      562    4559.177 22.059999
+40      2471  121.8600  23.7960  87.7782      275    5119.158  9.709000
+41     15386  669.3600  12.5064  71.4331     1762    5338.186 11.482944
+42       184    9.0000  22.2826  85.8696       40    5090.045  8.178000
+43      1217   61.4000  33.9080  88.0952       78    5485.496  8.174000
+44      6219  268.0000  21.4986 100.0000      571    4793.370  7.500000
+45      4258  221.0000  24.6595  92.7431      324    5092.917 10.050500
+46      1235   53.0000   8.2183  62.1302      175    4359.521  7.332000
+47     16244  766.6500  17.4531  69.7399     1423    5645.496 12.581577
+48       814   39.0000  19.7789  67.4447       85    4518.016 15.177000
+49     27176 1429.0000  39.2184  84.2950     3324    5864.366 12.109128
+50     10696  487.9700  22.1578  70.8957     1306    5257.997 11.785000
+51      8935  444.5000  36.9451  79.5120      786    5016.692 14.062000
+52      1600   74.5000  27.2614  79.7255      242    4720.086 10.472000
+53      9028  449.9200  13.9885  69.9425      669    5470.562 13.405117
+54     10625  521.4700   7.4975  77.5256      896    5615.442 12.301800
+55      7151  318.5800  18.5481  61.7382      560    5245.440 15.404071
+56      2404  105.0000  20.9274  52.9435      202    4838.175 13.762000
+57      5804  283.1500  28.3425  81.1165      480    5367.988 14.184000
+58      2253  112.6500  43.4976  84.5539      196    5526.237  8.865000
+59      2807  126.1200  15.4595  52.3964      152    4353.020 12.997000
+60      3074  142.5500  11.2898  66.1949      249    5034.290 11.592000
+61       723   37.1200  25.9211  83.1579       45    4692.494  8.279000
+62      5138  290.7750  58.7522  84.9990      560    5606.782 10.905643
+63     20927  953.5000  10.9114  82.3926     1048    4969.181 13.400625
+64      3017  138.5000  14.9768  56.0636      496    4675.675 11.081000
+65       957   50.0000  27.1682  82.1317      149    5306.133  9.082000
+66      1639   90.5000  46.8882  80.6042      287    5693.883 13.390000
+67      4340  209.8400  17.7026  93.9227      284    5181.580 14.601625
+68      5079  224.5000  25.5593  63.8036      585    5228.651 11.116000
+69      6639  304.7300  26.8414 100.0000      505    5339.391  8.423000
+70      1154   62.1000  22.9277  84.9206      129    6056.497 11.665000
+71       237   11.0000  19.8312  76.7932       13    4845.680  7.305000
+72      2987  141.2100  21.2588  68.3964      273    4826.666 13.730599
+73       499   30.0000  40.3670  83.1193       94    5367.090 11.116000
+74     11474  542.6500  40.5526  77.0089     1248    5742.733 10.364429
+75      1088   55.0000  14.1544  86.0294      107    4136.251  6.983000
+76      2660  140.1200  15.7601  74.8510      259    5267.831 14.467800
+77       353   19.9800   8.6721  33.0623        8    5238.392 14.653000
+78       329   18.5300  28.9157  85.5422       37    5462.899 10.629000
+79       252   16.5000  23.4568  66.2551       32    6313.374  9.781000
+80       175   12.5000  21.7647  68.8235       31    6653.031 10.656000
+81      3835  186.2000  13.9911  72.8628      897    5533.149 11.938000
+82       314   19.2500  29.9363  93.6306        8    6118.710  7.385000
+83      4458  211.0000  22.2222  72.3208      445    5098.627 10.676000
+84      1313   75.0800  32.0868  73.5976      112    5652.879  9.972000
+85       474   26.5000  21.5190  75.7384       36    5329.002  8.258000
+86      1114   57.7000  29.4468  62.2128      277    5929.809  8.896000
+87      1358   65.0000  14.7903  80.8683      178    4897.068 12.062000
+88     11629  546.3000  25.3794  83.8737     1015    5100.202  9.428895
+89      6195  306.7500  21.0433  68.5719     1261    4825.723  8.920333
+90       499   20.0000  23.6994  80.9249       35    4079.129 10.098000
+91       417   23.0000  19.9041  46.0432       27    5349.368 11.830000
+92       300   15.0000  48.3444  72.1854       55    5869.389 11.553000
+93       457   24.4000  16.8161  67.7130       50    6462.128 19.707001
+94       146    8.0000  25.3425  54.1096       34    6231.602  7.105000
+95       460   24.2200  10.5932  66.9492       71    4993.868 13.725000
+96       354   17.8000  10.2778  59.7222       28    4663.811 10.098000
+97      1841   95.0000  25.2580  64.7474      315    6107.106 13.762000
+98      3760  183.7500  26.9016  65.7961      717    5324.228  9.665000
+99       500   22.4300  18.8000  83.0000       70    5221.461 10.264000
+100     5112  246.9000  10.6912  59.7235      383    5157.785 11.569201
+101      146    7.6600  13.6986  66.4384       28    5131.119  7.405000
+102     2141  105.8200  26.4965  65.3828      134    5279.354 12.077000
+103      610   30.9800   8.5246  56.0656      144    4704.044 11.283000
+104      337   16.5500  21.2625  60.1329       26    6089.911 10.035000
+105     4501  227.8500  19.1297  63.9055      597    5356.833  8.384000
+106     5718  295.0500   6.8407  37.0456      313    5144.549 13.630000
+107    19402  846.3800  20.5237  51.2421     1182    4906.230 14.127667
+108     3401  175.5500  52.2199  74.2723      560    5489.589 11.266125
+109     2621  136.8300  25.8298  64.0977      397    5718.551 13.390000
+110      426   20.0000   3.9906  64.7887       87    4436.153 11.938000
+111      205   11.2000  18.5366  80.9756       24    4895.439  8.258000
+112    13668  648.4100  28.1753  56.2994     1321    5159.219 14.226727
+113      342   18.2000  11.3960  68.0912       98    5490.655 10.472000
+114     6518  332.1000  12.2791  71.0238      499    5172.020 14.242901
+115      239   12.2000  15.6118  69.6203       30    4441.673 14.066000
+116     2911  139.4700  11.9285  52.9735      281    5220.370 15.968000
+117     6272  297.0400  28.7200  71.7624     1338    5252.811 10.264000
+118    10218  508.7500  17.4202  70.8064     1435    5518.702 10.602470
+119     1735   87.1400  47.2622  75.5043      222    5609.488 10.523000
+120      474   26.6100  20.6751  82.0675       96    4945.032 11.238000
+121      544   30.0000  20.5505  74.8624      145    5223.025 10.056000
+122     1987  103.3700  15.2812  54.6541      283    4757.025 11.183000
+123      418   22.4000  10.6965  63.4328       50    5522.162  7.385000
+124      196   10.0000  19.6891  47.1503       40    6087.609 13.579000
+125     2208  114.5000  14.4140  53.2106       92    4960.516  9.630000
+126     1255   55.0000  11.3222  44.2597      165    4880.041 15.274000
+127     1469   78.1000  20.9666  80.2587       65    6538.418 14.034250
+128     7114  332.8400  34.5942  82.5722      680    4925.660 10.239667
+129     1962   98.0000  24.4151  67.7518      170    5204.688  9.485000
+130     7761  361.0000   6.4912  44.4766      658    4907.411 15.029875
+131      216   14.0000   9.4170  48.8789       47    5923.452  9.781000
+132      224   10.0000   7.1429  58.0357       31    4741.957 13.192000
+133     7887  391.8600  16.4024  57.0722     1004    4954.020 12.216000
+134      752   39.5000  11.7105  34.0789        0    5500.108 14.076000
+135     9328  537.8800   7.4875  39.0368     1719    5360.517 25.487333
+136      548   32.2000   7.6642  31.3869       35    5685.639 14.867000
+137      104    5.0000  32.3810  49.5238       19    5594.196  9.972000
+138      275   13.0000  12.7273  45.8182        4    4692.567 14.578000
+139      443   24.0000  14.2212  69.9774       52    5085.406  7.385000
+140    10337  540.0500  37.2269  58.5454     1268    5456.197 12.343000
+141      806   41.5300   7.1788  56.6751       36    5105.180 12.431333
+142      227   11.6000  18.0617  59.0308       25    5519.677 14.906000
+143     8416  391.4200  12.3990  71.9121     1333    5065.911 12.669900
+144      149    8.5000  19.4631  59.0604       30    5182.428 10.333000
+145      220   13.3900  19.1304  52.1739       48    5960.464 11.972000
+146     4612  232.9700  17.4761  65.9150      601    5124.836 12.827000
+147      590   34.3300  37.4368  70.6577       71    5655.133 10.040000
+148      133    7.5500  25.0000  72.1429       25    5811.690 13.335000
+149     2440  121.2400   7.2759  47.0299      116    5467.674  9.854000
+150      133    6.0000  11.1940  35.8209        0    5213.089 11.426000
+151      519   26.0000  16.7630  37.9576       65    4613.188 15.131000
+152      222   11.6600   7.5893  40.6250       30    4886.984 14.578000
+153      285   18.7200  26.6423  76.2774       36    6455.137 10.268000
+154     3129  147.9800  26.1676  55.7901      471    5125.433 15.592857
+155     2019  102.7800  10.2526  40.5646      167    5193.692 11.238000
+156     5620  267.0000  10.3095  55.0939      316    5002.839 15.051375
+157     9775  484.5000  13.0430  62.5039     1218    5337.625 15.413177
+158      246   11.5000   9.7561  43.9024       38    5161.202 11.081000
+159     7210  360.3500  26.6268  68.8579      800    5158.792 10.098000
+160    21338 1051.5800  13.2272  45.9950     2889    5123.474 14.298300
+161      477   27.0000  25.3669  59.5388       27    5782.544 11.803000
+162      727   39.9000  10.1788  32.1871       50    4842.608  9.972000
+163      374   18.4500   6.6845   7.4866       46    4219.406 15.409000
+164    18255  903.7600  11.2217  58.5331     2001    5081.170 15.293799
+165     8787  410.9100  10.0227  32.4830     1058    5144.994 15.532928
+166      797   38.0000   7.0263  35.7591       60    4674.299 16.292999
+167      140    7.0000   3.5714  39.2857       40    4830.326 12.875000
+168      235   13.7000   6.8085  67.2340       51    5621.688 16.622999
+169     8294  371.1000  23.1975  51.5674     1295    4948.868 12.549883
+170     2409  108.6600   8.1515  52.1202      354    5100.976 14.258572
+171      150    8.2500   3.2258  23.2258       16    5132.789 18.326000
+172     3981  210.0000  41.7734  51.7709      606    5358.517 12.749143
+173     2326  117.8000  17.9751  52.2523      345    5149.187 11.426000
+174      501   30.5000  20.6349  54.7619      163    5373.207  8.830000
+175      470   28.2700  31.3305  89.6996       48    6485.166 11.176000
+176      575   35.1000  26.4348  59.1304       59    5504.025 14.228000
+177     3519  175.3000   5.5413  29.7812      789    5105.734 15.027000
+178      474   26.3400  21.9959  54.9898       61    5634.731 10.521000
+179      223   11.5000   1.7544  17.5439       60    4980.294 18.625999
+180       92    5.6000  13.5417   0.0000       22    6113.860 22.528999
+181     4971  297.1400  14.7094  55.1008      500    5850.000 18.298389
+182     2617  107.1950   8.3682  32.3697      226    4547.945 11.885750
+183      242   13.2500  28.0992  51.6529       32    5011.840  9.926000
+184      780   41.1500  16.5394  50.7634       75    5261.371 14.197000
+185      324   15.4000  13.0031  58.2043       50    4276.115  9.630000
+186      140    6.7500   7.8571  45.7143       25    4566.270 10.639000
+187      181   10.0000  25.4144  66.8508       26    6049.495 14.475000
+188      516   26.0000   9.2593  24.8148       65    4974.281 13.467000
+189      108    5.0000   3.6697  32.1101       25    4432.478  9.665000
+190      419   18.6700  13.9535  50.0000       58    4924.619 12.708000
+191    12567  546.0500   7.6231  40.3995     1099    4603.660 17.823000
+192      287   16.1700   3.7931  31.0345       65    5973.925 17.156000
+193     6201  339.1000   7.1796  47.7025      634    5215.944 19.589636
+194      577   29.9500  20.3361  46.0504      134    4882.237 14.197000
+195      170    7.5000  10.5882  32.3529       41    4145.836 11.912000
+196      164    8.5000  33.5366  65.8537       36    7542.038 13.386000
+197      382   22.0000  29.2383  59.2138       75    5247.018 11.554000
+198     1221   61.6000   4.3407  25.3071      250    5169.815 19.025999
+199     2214  108.3500  12.8726  36.4499      213    5951.006 16.407000
+200     4523  215.0000   5.7519  29.1987      409    4746.572 14.058000
+201      793   39.8000   4.4136  30.7692       49    4944.092 19.068001
+202     1678   88.2700   5.4827  38.2002      254    6306.487 20.770000
+203      536   22.5000   5.5970  28.1716       35    4260.307 10.264000
+204      307   15.8500   5.5375  28.6645       36    4718.163 14.578000
+205      347   17.5000  18.4438  53.6023       56    4751.300 10.202000
+206      168   11.0100  29.1667  63.6905       30    5653.454 12.502000
+207      532   31.0000  10.5066  29.6435       81    5920.253 13.906000
+208     3272  150.0000  24.0220  76.7726      374    4825.591  9.986000
+209     2045  107.2100  12.1271  40.9291      268    5532.582 13.712000
+210      156    6.0500  10.4294  47.8528        7    3926.070 10.098000
+211     1129   61.9900  34.1895  62.2675      164    5805.637 11.291000
+212     3669  201.9700  11.3589  41.0546      500    4899.240 13.225000
+213      157    9.2500   1.8987  10.1266       19    4884.862 13.630000
+214     4928  229.2000   8.5420  25.8885      618    5139.938 14.623000
+215      103    5.0000   5.8252  23.3010       13    5249.365  8.776000
+216      175   10.3000  14.8571  70.2857       17    5399.070 10.338000
+217     4153  199.8600   7.5269  23.4409      241    4965.290 16.323000
+218      280   18.0500   8.6957  56.5217       67    6210.323 10.656333
+219      865   43.5000   3.0842  12.5741       96    4797.503 14.578000
+220     8735  408.2000   7.4966  21.3434     1120    5397.162 18.630600
+221      412   20.1000   8.7379  60.9223       72    5078.500 11.116000
+222     6373  329.1200  12.6785  36.8900      624    4733.747 14.597667
+223      332   18.8000   9.0361  34.0361       73    4963.060 15.493000
+224     2903  138.1200  11.1264  34.4471      192    5431.177 16.271999
+225      565   29.6500   6.7257  36.6372       60    5382.089 13.630000
+226      586   26.0000   7.5085  37.8840       78    5724.442 12.394000
+227     5068  240.1000   7.0639  34.2344      626    4843.427 15.331000
+228      859   42.8400  16.4144  40.1630      118    5730.349 12.666000
+229      145   10.2100   8.2759  20.0000       20    5635.786 13.712000
+230      649   35.1250   3.8521  19.5686      155    5671.657 17.780334
+231     1789   96.0000   2.9625  56.0089      435    7070.633 10.556667
+232      775   37.0000  24.9032  61.4194       50    5097.343 10.523000
+233      777   36.8500  12.9887  39.8487      148    5482.677 13.243000
+234     3518  188.2000   9.7708  49.4269      419    5642.832 22.473000
+235    19294  924.5700  18.9319  50.9708     2401    5280.023 15.684654
+236     7661  386.4200   7.8058  32.1368     1158    5433.340 23.483749
+237      158    8.0000   6.3291  25.3165       34    4529.284 11.649000
+238      117    6.0000   8.4034  36.1345       42    6039.986 16.356001
+239      160    8.7000  16.0920  36.7816       37    6168.229 14.074000
+240      511   27.2000  27.4854  51.8519       30    5774.970 13.437000
+241     2770  140.1100   3.6101  25.5596      296    4806.762 18.337999
+242      551   28.5000  15.2344  51.5625       46    4840.936 11.426000
+243     5205  242.5000   8.3189  37.2911      474    4954.466 15.749917
+244     6437  278.8400   2.5167  17.1508      622    4023.532 15.779000
+245     1712   81.2800   5.3738  32.6519      122    5179.411 14.062000
+246      370   19.8000   6.5041  36.3144       56    4385.229 12.174000
+247     3182  153.2000   3.5305  26.9433      328    4777.513 12.900000
+248      139    7.2000   0.7194  29.4964       32    4862.791 10.971000
+249    11855  588.8400   9.0158  32.7655     1507    5486.030 17.435200
+250     1068   51.6700  12.8277  36.7978      129    5486.382 14.760000
+251     2295  103.0000   4.0395  31.3709      224    4631.244 14.603000
+252     1510   73.3000  10.2598  37.1086      141    5189.628 13.522333
+253      579   27.8000   1.5000  31.5000       60    4600.606 16.669001
+254     1012   52.6400  10.4847  33.6301      140    6735.775 13.522250
+255     1212   68.6500  18.2972  47.1247      107    5475.173 12.518000
+256      119    7.0000   4.0000  33.6000       23    5990.794 18.326000
+257      590   35.7625   7.7966  30.6780       78    7203.247 11.466000
+258      546   27.6000  13.9194  54.7619       60    4777.769 10.098000
+259      248   11.1200   7.4627  21.2687       51    4302.835 15.365000
+260      461   26.0000  14.4708  48.8121      150    5630.195 10.311333
+261     6312  308.6800   9.8379  22.6930      496    4708.625 16.986626
+262      285   13.9900   7.2414  66.2069       62    5629.961  9.612000
+263     2325  115.3000   2.8817  15.6559      302    4890.987 21.110500
+264    11885  549.8400  10.1977  30.4417     1790    4929.393 16.473312
+265      564   27.4300   6.8966  21.3793       46    4905.221 18.368999
+266    12380  620.3800  12.2952  31.0189     1671    5156.857 16.654112
+267     3772  178.0600   3.3720  18.3878      529    4941.788 18.544222
+268      895   47.5800  17.5532  42.4468       70    5408.782 14.180000
+269     5714  277.6700  10.5343  30.0691      489    4981.388 18.029554
+270      105    5.7300   0.0000   0.0000       16    4877.086 13.586000
+271     1449   76.9900  16.5279  42.6009      125    5111.739 12.640000
+272      510   24.5000  20.3922  45.8824       95    5201.516 11.103000
+273      160    8.0000  11.2500  56.8750       39    4138.306  7.500000
+274      433   22.0000   9.3361  25.1037       50    5743.597 15.506000
+275     3186  164.3100   5.4539  44.3907      411    5702.705 22.841400
+276     5010  239.4000   5.2989  27.3545      576    4802.153 19.823126
+277      717   35.9500   8.8889  24.7222      100    5442.143 16.347000
+278     3548  170.6500   3.2600  14.8509      335    4522.375 16.292999
+279      868   45.2000  16.5899  29.8387       78    4965.808 13.248000
+280      507   26.6500  13.2039  37.0874       60    5358.326 14.010000
+281      822   46.6500   8.0738  25.6055      105    5784.625 14.163000
+282     1792   88.5500   3.1250  20.9263      143    5072.705 15.771000
+283     1202   62.3000  12.0769  35.8462      190    5556.041 14.483333
+284      515   27.3500  16.1165  26.2136       58    5190.310 14.209000
+285     1354   66.5700  12.0384  36.4845      263    5211.485 15.167000
+286     1252   65.1100   9.4512  43.2165      113    5284.164 12.584250
+287      823   46.0000  13.8518  55.2855      127    5331.921 10.551000
+288     2231  114.3000   2.9161  13.3692      258    5599.608 16.955999
+289      271   14.2000   4.4674  25.4296       81    4881.899 17.709000
+290      309   15.5000   4.2071  32.6861       85    4700.432 16.271999
+291     3005  159.2200   8.6190  33.8103      308    5650.000 17.900801
+292      966   47.9600  20.9581  47.3054      114    5318.241 11.834000
+293     7710  327.3000   4.4722  15.9299      814    4709.054 18.620199
+294      762   35.5000  10.8108  30.3732       54    5143.190 12.431000
+295     1708   89.0000   8.4895  29.0398      206    5133.010 15.167000
+296     9850  489.3000   3.3350  30.6437     1113    5081.456 20.875750
+297      129    5.0000   9.3023  50.3876       10    4016.416 10.639000
+298    10619  565.5100   2.5384  28.3766     1150    5374.050 25.029619
+299     4521  236.5800   3.7052  31.0828      494    5427.549 16.757801
+300      580   29.4400  11.8966  30.1724      114    5179.645 15.297000
+301     2569  138.0000   5.4864  24.7471      326    5400.000 17.369446
+302     6022  286.8000   6.3950  36.0007      756    5726.146 22.096001
+303      670   33.5000   0.4161  13.8696       47    5003.870 22.841999
+304    14708  700.9400  13.5301  45.7234     1962    4969.511 18.319876
+305     6601  305.0000   1.1968  15.0886      706    4747.296 25.030001
+306      675   33.7000   0.0000  31.8519       87    4543.305 21.957001
+307     2458  124.0700   6.0187  24.6035      193    5229.591 18.796833
+308      144    8.0000   4.1667  44.4444       14    4507.353 10.639000
+309      573   29.6000   6.9930  15.2098       48    5302.628 17.507999
+310      721   35.7300   1.8494  18.4941       82    5545.610 18.593000
+311      992   46.9700   3.7298  22.8831      160    4615.909 11.116000
+312     8432  360.5000   6.3923  22.9839        0    5397.689 14.097667
+313      244   11.0000  15.5738  40.1639       15    5118.373 12.640000
+314     7116  356.8200   2.5990  13.2762      785    5008.071 20.936428
+315      830   46.6600  10.4119  32.6087       95    4906.030 14.180000
+316      160   10.8800  13.3758  53.5032       38    6870.346 11.826000
+317     1588   83.4000   6.7985  20.5810      220    5301.716 18.671000
+318     2272  108.7500   4.0493  16.0651      307    5182.366 17.332001
+319     1425   71.8300   5.0926  19.8302       65    4999.469 17.507999
+320      245   12.5500   8.9796  13.0612       30    6732.066 15.572000
+321     1349   65.2125   2.0015   8.6731      259    4612.990 15.567250
+322      400   22.0000  13.8009  29.8643       65    5478.846 15.752000
+323     4632  245.1800   7.0370  23.6420      637    5666.714 20.469999
+324      224    9.0000   5.3571  35.2679       15    4742.514  9.709000
+325      576   31.0000   3.9931  28.1250       92    4907.393 11.116000
+326      451   25.0000   8.6475  11.7517       75    5700.402 16.320999
+327      900   50.7500   2.1018  24.3363      145    5191.834 21.966999
+328      118    5.5000   8.3333  51.6667       10    4451.257  8.934000
+329     1457   73.1300   5.9823  42.9640        0    5627.528 19.997000
+330     4734  232.7500   2.6078  19.3725      586    4922.940 18.827230
+331     3303  146.5000   4.6624  16.9543      379    4969.381 18.118666
+332     6055  286.9200   5.6134  30.0851      540    4829.717 23.667376
+333      424   23.3000   3.5377  15.3302       39    6716.693 22.139000
+334     2801  139.3000   5.0339  23.0989      615    5205.942 20.546000
+335      187    9.7600  17.5532  44.6809       37    4357.826  9.485000
+336      129    6.6000  13.9535  27.1318       17    5195.919 11.834000
+337      188    9.0000   6.3830  36.7021       41    6002.072 18.799000
+338     1212   65.9000  22.1947  46.1221      116    5090.588 10.551000
+339     2596  135.3500   3.0046  19.5300      249    5112.390 15.519000
+340     4925  253.8960   3.8211  12.1748      753    5287.355 21.631727
+341     6257  288.6300   2.1635  15.5128      930    4889.480 21.095751
+342      868   45.0000   4.7235  19.0092      122    5118.130 15.167000
+343     3787  186.1000   3.2480   8.3443      934    5119.123 19.117001
+344     6423  306.3800   2.9299  14.2660      855    4792.211 17.620001
+345      678   34.8400   2.5074  15.9292       47    5450.104 15.167000
+346      162    8.4000  16.9591  33.9181       23    5210.725 10.643000
+347     8529  407.7000   2.1925  11.7013      834    4715.446 20.739056
+348     1862   89.0900   2.8297  21.0892      231    4632.068 21.566000
+349     1452   70.5000   2.4260  10.4142      183    5028.562 17.656000
+350      155    8.0000   0.6452  12.2581       32    5695.467 17.709000
+351     2536  127.1100   2.0328   2.0328      343    4504.295 27.816000
+352      567   30.0800   4.8951  29.0210      103    5156.437 18.593000
+353      953   52.6000   7.9876  33.9212      135    5433.514 14.263000
+354      296   15.4300   5.5921  25.9868       42    5254.632 22.757999
+355      198    9.0000   2.4510  12.7451       24    4593.197 12.640000
+356      218   10.1000   2.2422  25.1121       49    4320.679 11.238000
+357      734   36.0000   2.0243  12.8205      117    4920.777 16.955999
+358      189   11.6000   2.0725  32.1244       50    6905.869 17.709000
+359     2528  138.3100   1.3421   2.4456      482    5729.904 25.622000
+360     2987  154.1700   2.0422  11.1818      290    4825.202 18.726000
+361      208   11.0000   9.3897  32.8638       21    5388.170 13.443000
+362      379   23.1000   2.9024  22.1636       29    5133.827 15.180000
+363      145    9.3000   6.2069   0.0000       27    5346.156 19.117001
+364      706   37.7400   2.5937  23.0548      103    4789.309 13.712000
+365      878   47.9000   1.3750  15.7500      105    5329.782 17.507999
+366      594   33.1800  12.2689  25.3782       75    5371.173 11.834000
+367      139    7.3500  20.8633  66.9065       40    5771.384 13.273000
+368     2089  102.7800   2.5185  14.0370      318    4993.635 16.356001
+369      326   16.2800   4.2945  11.0429       42    4854.038 18.625999
+370      516   21.5000   0.9690  27.7132       50    4392.680 23.733000
+371      449   25.5000  12.7273  48.4848       50    5884.432 12.934000
+372      297   15.3500   2.3569   4.0404       70    4273.993 13.906000
+373     1579   80.2400   5.5556  21.7803      165    5146.784 15.428000
+374      383   20.4500   6.0052  10.1828       49    5351.523 15.381000
+375       81    5.1000   3.6145   0.0000       14    7667.572 22.528999
+376     5259  262.2300   2.3959  19.0911      701    5281.709 23.806099
+377     1960  108.9600   1.9417   3.7302      223    5368.503 24.603001
+378      151    8.9000   2.6490   8.6093       31    6429.257 36.174000
+379      946   49.1700   2.1784   6.5353      310    5387.459 33.455002
+380     2707  141.0200   5.1396  19.2308      300    5235.775 20.480223
+381      919   46.8900   1.0493   0.0000      141    4829.896 20.134001
+382      945   46.0000   4.2399  10.6515      216    5088.708 19.346500
+383      738   39.7020   0.0000   0.6775      220    5390.118 36.174000
+384      164   10.5100   2.3529  12.9412       35    6588.431 22.863335
+385      167   10.9200   0.5208  11.4583       29    6196.695 17.709000
+386      125    7.0800   4.0000  14.4000       25    4645.413 14.177000
+387     1091   62.0600   0.5367   0.5367      113    6489.929 41.092999
+388      134    6.0000   0.7463   3.7313       27    5094.959 21.957001
+389      600   32.0000   2.6941  29.3185       55    4841.958 16.063999
+390     1803   99.6000   1.9242   3.6220      283    6315.312 25.737000
+391      158    7.8000  13.7500  16.2500       15    5399.383 20.474001
+392     2392  127.2200   1.4214   6.2709      439    5429.474 35.810001
+393      526   28.0200   3.9924  11.4068       33    5644.286 13.567000
+394      141    6.9100  10.0719   9.3525       44    6060.257 20.089001
+395      235   12.6000   4.6610   5.9322       30    5319.554 18.283001
+396     3280  158.4000   2.7523   7.8593      406    4819.904 25.239716
+397     1254   57.0000   1.5823  12.5000        0    5208.226 25.063000
+398      948   53.5600   1.7932   1.8987      155    5859.965 30.628500
+399    15228  708.8300   1.7154   4.6909     2232    4962.737 27.475216
+400       81    4.8500  13.2530  20.4819       21    7614.379 30.840000
+401     2768  141.4000   0.4481   2.7921      540    5566.468 34.159500
+402      535   31.0000   0.0800   0.7200       84    7039.949 43.230000
+403     2542  146.3000   0.8261   9.6774      404    6604.064 27.947750
+404     1940  111.8200   0.4124   3.9175      265    6180.149 49.938999
+405     1059   65.1200   0.8499   1.4164      272    6460.657 55.327999
+406     2340  132.2000   1.5812   2.4359      403    6415.355 35.480999
+407     3469  172.3400   0.0000   0.1734      496    5230.877 34.300999
+408     2106  115.3000   1.7094   2.6116      300    5838.172 38.628571
+409      478   32.8700   0.0000   0.0000      112    7711.507 35.341999
+410     1885   98.4200   0.0506   0.3033      241    5592.765 31.052000
+411     2422  139.4700   0.0000   0.1239      466    5933.154 40.264000
+412     1318   87.0600   0.1517   0.0000      412    7593.406 35.810001
+413      220   12.3300   0.4545   0.0000       22    6500.450 43.230000
+414      687   44.5900   0.3049   0.0000      209    7217.263 50.676998
+415     2341  124.0900   0.1709   0.5980      286    5392.639 40.402000
+416      984   59.7300   0.1016   3.5569      195    7290.339 28.716999
+417     3724  208.4800   1.0741   1.5038      721    5741.463 41.734108
+418      441   20.1500   3.5635  37.1938       45    4402.832 23.733000
+419      101    5.0000  11.8812  59.4059       14    4776.336  9.952000
+420     1778   93.4000   6.9235  47.5712      313    5993.393 12.502000
+        english  read  math
+1    0.00000000 691.6 690.0
+2    4.58333349 660.5 661.9
+3   30.00000191 636.3 650.9
+4    0.00000000 651.9 643.5
+5   13.85767746 641.8 639.9
+6   12.40875912 605.7 605.4
+7   68.71794891 604.5 609.0
+8   46.95946121 605.5 612.5
+9   30.07915688 608.9 616.1
+10  40.27592087 611.9 613.4
+11  52.91479874 612.8 618.7
+12  54.60993195 616.6 616.0
+13  42.71844482 612.8 619.8
+14  20.53388023 610.0 622.6
+15  80.12326050 611.9 621.0
+16  49.41314316 614.8 619.9
+17  85.53971863 611.7 624.4
+18  58.90736389 614.9 621.7
+19  77.00581360 619.1 620.5
+20  49.81398773 621.3 619.3
+21  40.68181992 615.6 625.4
+22  16.21052551 619.9 622.9
+23  45.07486343 622.9 620.6
+24  39.07563019 620.7 623.4
+25  76.66525269 619.5 625.7
+26  40.49118423 625.0 621.2
+27  73.72023010 620.4 626.0
+28  70.01153564 616.5 630.4
+29  55.96221542 620.1 627.1
+30  11.06194687 627.9 620.4
+31  80.42008972 620.4 628.7
+32  63.13035583 623.0 626.9
+33  65.12185669 620.8 629.8
+34  53.41640091 626.1 625.6
+35  49.82307053 625.4 626.8
+36  35.46537018 625.4 628.2
+37  56.12552643 623.6 630.2
+38  32.39436722 628.9 625.3
+39  65.51210022 624.4 630.1
+40  53.05544281 627.5 627.1
+41  49.64253235 627.8 628.7
+42  45.10869598 621.6 635.2
+43  30.32045937 629.4 627.7
+44  52.24312592 621.1 636.2
+45  36.80131531 626.5 631.0
+46  30.28339958 630.2 629.4
+47  49.86456680 629.5 631.2
+48  13.75921345 631.9 628.9
+49  28.86370468 631.6 629.5
+50  52.80478668 628.5 632.6
+51  44.08506012 628.4 633.7
+52  35.25000000 635.7 627.1
+53  37.49446106 633.0 630.7
+54  50.39059067 629.6 634.2
+55  31.07257843 634.2 629.7
+56  18.26123238 633.5 630.5
+57  34.70020676 631.4 633.0
+58  33.28894806 637.5 627.0
+59  33.48770905 637.3 627.6
+60  38.15875244 633.2 632.5
+61  36.92946243 629.2 636.7
+62  32.98949051 630.3 635.8
+63  58.21665573 629.6 636.7
+64  17.00364685 634.4 632.9
+65  17.65935326 634.7 633.1
+66   7.32153749 638.4 629.6
+67  31.19815636 631.9 636.2
+68  16.61744499 637.7 630.5
+69  58.08103561 631.5 636.7
+70  55.89254379 636.8 631.5
+71   5.48523235 631.8 636.6
+72  14.42919350 637.7 631.1
+73  22.84569168 635.5 633.6
+74  38.78333664 633.2 636.2
+75  64.24632263 631.1 638.7
+76  25.22556496 637.8 632.1
+77   5.38243628 636.6 633.5
+78   6.07902765 644.3 626.1
+79   0.00000000 640.9 630.0
+80   0.00000000 634.6 636.6
+81  34.88917923 633.0 638.2
+82  13.05732441 636.7 634.8
+83  36.02512360 633.2 638.7
+84  34.65346527 633.9 638.3
+85  28.69198227 634.7 638.3
+86   1.79533219 645.4 627.8
+87  30.63328552 632.3 641.1
+88  59.03345490 632.4 641.4
+89  13.55932236 636.2 637.7
+90   5.01001978 636.1 637.9
+91   0.95923263 638.0 636.2
+92   0.66666669 640.9 633.8
+93  38.51203537 644.9 630.4
+94   0.00000000 646.1 629.8
+95  17.17391396 633.2 642.7
+96   9.88700581 636.7 639.3
+97  19.39163589 640.4 636.0
+98  36.48936081 636.2 640.4
+99  39.39999771 630.4 646.2
+100 28.67762184 638.6 638.1
+101 13.69863033 637.5 639.6
+102 11.34983635 636.9 640.5
+103  3.44262314 640.3 638.2
+104 15.43026733 642.7 635.9
+105 17.97378349 639.9 638.8
+106 22.71773338 641.4 637.6
+107 18.43624496 641.7 637.8
+108 16.17171478 641.5 638.1
+109  2.02212882 641.4 638.3
+110  9.62441349 634.3 645.5
+111 41.46341324 643.5 636.7
+112  9.89903450 640.4 639.9
+113 16.08187103 637.7 643.3
+114 43.49493790 638.5 643.0
+115  8.78661060 644.9 636.9
+116 39.02438736 640.4 641.8
+117 53.89030457 639.3 643.6
+118 41.13329315 638.6 644.3
+119  1.38328528 640.8 642.3
+120 35.44303894 638.9 644.7
+121  8.63970566 641.8 642.6
+122 15.34977436 637.0 647.4
+123 19.85645866 640.2 644.6
+124  3.06122446 652.6 632.9
+125  9.87318802 642.0 644.1
+126 16.09561729 642.6 643.8
+127 43.49897766 639.4 647.1
+128 45.03795242 638.9 647.9
+129 18.19571877 641.7 645.1
+130 15.48769474 644.2 642.8
+131  0.92592591 652.7 634.3
+132  7.58928585 633.6 653.8
+133 29.08583832 645.7 641.7
+134  0.13297872 652.3 636.1
+135 50.85763168 644.5 643.9
+136 11.49635029 652.1 636.7
+137 13.46153927 649.5 639.4
+138  4.72727251 643.2 645.7
+139 21.44469452 644.3 644.7
+140 12.35368061 646.0 643.1
+141 30.14888382 645.3 644.1
+142 15.85902977 649.7 640.2
+143 43.75000000 642.9 647.3
+144  0.00000000 656.8 633.7
+145  0.00000000 658.0 633.1
+146 16.65221214 647.7 643.4
+147  3.22033906 644.8 646.4
+148  0.00000000 644.3 647.2
+149 48.52458954 645.5 646.0
+150  0.75187969 652.5 639.5
+151  1.92678237 650.9 641.5
+152 13.51351261 643.0 649.7
+153  0.00000000 641.6 651.2
+154 16.71460533 647.8 645.2
+155  5.94353628 649.1 644.0
+156 36.17437744 644.0 649.4
+157 44.97186661 645.6 648.2
+158 16.66666794 647.8 646.1
+159 15.18723965 642.5 651.6
+160 34.33779907 645.0 649.5
+161  0.00000000 650.8 643.8
+162 13.06739998 649.4 645.8
+163  4.27807474 651.6 643.6
+164 39.59463120 645.0 651.0
+165 21.66837311 648.0 648.4
+166  3.26223326 648.8 647.7
+167  7.85714293 651.6 645.1
+168 39.57446671 643.4 654.0
+169 10.12780285 645.1 652.8
+170 27.52179146 646.0 652.3
+171 14.00000000 655.2 643.4
+172  8.84200001 649.8 649.2
+173  6.40584660 651.3 648.1
+174  2.39520979 652.6 647.1
+175  5.95744705 655.1 645.8
+176  8.17391300 654.6 646.5
+177 15.45893669 655.4 645.8
+178  0.00000000 653.6 647.7
+179  0.00000000 651.8 650.0
+180  0.00000000 656.1 645.7
+181 31.82458305 653.3 649.0
+182 12.80091667 651.7 650.7
+183  0.00000000 654.4 648.3
+184  3.84615397 662.0 640.8
+185  2.46913576 647.0 655.9
+186 10.71428585 654.2 649.4
+187  0.00000000 651.9 651.8
+188  1.93798447 656.3 647.5
+189  4.62962961 648.2 655.8
+190  5.25059652 656.4 647.8
+191 27.54038239 651.6 652.6
+192 14.98257828 655.1 649.5
+193 47.87937546 650.9 653.7
+194  0.00000000 657.2 647.5
+195  1.76470602 660.3 644.5
+196  0.00000000 655.2 649.6
+197  0.00000000 653.1 651.9
+198  7.28910732 656.8 648.9
+199 17.02800369 656.1 650.1
+200 10.43555164 653.7 653.1
+201  2.26986122 652.4 654.6
+202 28.24791336 655.6 651.5
+203  8.76865673 653.4 653.7
+204  7.49185658 654.1 653.3
+205  9.79827118 655.5 652.1
+206 12.50000000 655.9 651.8
+207  0.00000000 656.6 651.3
+208 31.20415497 651.4 656.8
+209  1.36919320 657.8 650.6
+210  9.61538506 659.8 648.6
+211  0.00000000 655.1 653.5
+212 24.25728989 652.7 656.5
+213  9.55414009 654.2 655.5
+214  5.92532444 653.5 656.2
+215  0.97087377 662.2 647.6
+216 18.28571320 650.0 660.1
+217  4.98434877 657.4 652.7
+218  4.28571463 660.4 649.7
+219  3.35260105 660.8 649.6
+220 32.70749664 655.4 655.2
+221  9.46601963 653.0 657.7
+222  6.26078749 657.6 653.1
+223 13.25301266 653.2 657.6
+224  3.16913533 662.0 649.1
+225 16.99114990 651.6 659.8
+226  0.85324234 662.0 649.6
+227  6.64956570 655.9 655.8
+228  0.11641444 654.1 658.7
+229  0.00000000 657.8 655.2
+230  6.93374443 658.7 654.4
+231  9.55841255 655.4 657.9
+232  0.90322578 661.5 651.9
+233  1.15830112 663.4 650.2
+234 40.10801697 656.7 656.9
+235 16.66321182 657.6 656.4
+236 21.95535851 657.3 656.7
+237  8.86075974 661.0 653.3
+238  0.85470092 664.9 649.9
+239  0.00000000 672.8 642.2
+240  3.91389418 664.2 650.9
+241 11.94945908 659.7 655.6
+242  3.99274039 660.2 655.3
+243 22.93948174 655.1 660.5
+244  2.48563004 658.5 657.3
+245  9.87149525 657.0 659.0
+246  0.54054058 664.0 652.7
+247  8.95663166 654.7 662.5
+248  6.47481966 661.3 656.3
+249 20.72543144 654.9 663.2
+250  0.18726592 662.1 656.2
+251 13.98692894 658.3 660.4
+252  8.74172115 662.8 656.0
+253 20.03454208 660.0 658.8
+254  1.38339925 660.8 658.8
+255  2.06270623 660.4 659.4
+256 28.57143021 661.7 658.4
+257  0.16949153 673.1 647.1
+258 13.73626423 659.8 660.6
+259  0.00000000 667.8 652.8
+260  0.21691975 666.9 654.6
+261  3.12103939 662.1 659.8
+262 47.36842346 661.1 661.6
+263 22.70967865 662.0 660.9
+264 29.12074089 659.1 664.1
+265  4.43262434 672.4 650.8
+266  4.81421661 660.1 663.6
+267  5.24920464 665.4 658.3
+268  1.89944136 662.7 661.0
+269  8.66293335 664.3 659.5
+270 10.47619057 662.5 661.3
+271  1.24223602 660.4 663.5
+272  0.00000000 663.1 661.7
+273  9.37500000 651.4 673.4
+274  1.38568139 665.4 659.5
+275 35.34212112 663.5 661.5
+276  9.64071846 661.7 663.4
+277  2.23152018 669.4 655.7
+278  0.36640361 658.3 667.0
+279  0.57603687 662.4 663.0
+280  0.00000000 667.1 658.4
+281  0.85158151 668.3 657.5
+282  5.52455378 667.4 659.3
+283  0.00000000 664.3 662.6
+284  0.00000000 660.2 666.8
+285  2.43722320 666.4 661.3
+286 20.76677322 659.4 668.3
+287  2.18712044 657.7 670.1
+288 13.62617588 666.2 661.8
+289 13.28413296 668.7 659.3
+290  1.94174755 671.3 657.0
+291 23.06156540 666.7 661.6
+292  0.62111801 674.0 654.6
+293  3.25551224 663.4 665.4
+294  0.00000000 663.1 665.8
+295  2.22482443 665.5 663.9
+296 18.55837631 663.7 665.8
+297  6.20155048 667.6 662.3
+298 18.45748138 665.9 664.0
+299 32.07255173 666.8 663.4
+300  3.96551704 656.2 674.2
+301 15.33670712 669.8 660.9
+302 27.66522789 663.9 667.4
+303 12.53731441 670.3 661.5
+304 12.68017483 664.5 667.4
+305  6.90804434 668.0 664.0
+306 14.96296215 668.7 663.4
+307 11.26932526 666.9 665.3
+308  9.72222233 671.9 660.4
+309  3.31588125 671.0 661.3
+310  0.69348127 668.8 664.1
+311  5.14112902 671.2 661.9
+312  4.96916533 663.7 669.5
+313  6.96721315 672.1 661.2
+314  7.99606514 667.5 665.8
+315  0.48192772 662.1 671.3
+316  2.50000000 666.9 666.8
+317  3.84131002 671.3 662.4
+318  1.32042253 667.7 666.6
+319  4.91228056 669.8 664.6
+320  0.00000000 672.2 662.7
+321  0.22238696 667.0 667.9
+322  0.00000000 669.2 666.0
+323 17.85405922 669.4 666.6
+324  4.46428585 660.5 675.7
+325  9.54861164 665.8 671.0
+326  3.99113083 672.7 664.5
+327 20.66666603 668.8 668.5
+328  7.62711859 668.5 669.1
+329 27.45367241 666.2 671.6
+330 10.85762596 665.5 672.4
+331  5.02573395 666.1 672.1
+332 14.23616886 668.9 669.7
+333  0.23584905 680.9 657.7
+334  2.07068896 673.3 665.4
+335  8.55614948 664.6 674.1
+336  0.00000000 670.1 669.5
+337  4.78723431 673.2 666.5
+338  3.96039605 669.2 670.7
+339  1.57935286 669.2 670.8
+340  3.59390855 672.8 668.6
+341  8.72622681 671.2 671.3
+342  0.00000000 674.6 668.0
+343  0.26406127 674.9 668.3
+344  1.44792151 671.4 671.8
+345  0.14749262 677.6 665.7
+346  0.00000000 679.8 663.6
+347  3.70500636 668.9 674.6
+348  0.26852846 673.1 670.7
+349  0.00000000 679.6 664.2
+350  4.51612902 672.3 671.6
+351  2.44479489 676.1 668.0
+352  0.00000000 673.9 670.2
+353  0.00000000 668.1 676.5
+354  5.40540552 674.6 670.1
+355  0.00000000 672.7 672.2
+356  6.42201805 669.4 675.7
+357  6.53950930 676.1 669.3
+358 14.28571510 679.1 667.0
+359  3.67879748 675.0 671.5
+360  0.50217611 676.1 670.5
+361  0.00000000 680.5 666.6
+362 22.69129372 670.5 676.6
+363  0.00000000 670.5 677.3
+364  0.14164306 676.0 672.5
+365  2.73348522 681.0 669.8
+366  1.68350172 683.0 668.4
+367  0.00000000 680.1 672.2
+368  0.14360937 673.8 679.3
+369  0.00000000 673.3 679.9
+370 11.04651165 680.5 673.2
+371  0.00000000 672.8 681.1
+372  0.00000000 679.0 675.5
+373  0.06333122 678.5 677.4
+374  0.00000000 682.9 673.2
+375  0.00000000 685.3 671.5
+376 15.05989742 679.0 678.6
+377  1.47959185 684.1 674.7
+378  2.64900661 676.8 682.2
+379  1.47991538 683.1 676.2
+380  4.46989298 678.7 680.8
+381  0.32644179 680.2 679.4
+382  2.53968263 685.7 674.4
+383  0.54200542 684.2 676.7
+384 11.58536625 682.8 679.8
+385 11.37724495 680.8 681.8
+386  0.00000000 688.5 674.7
+387  1.37488544 689.8 674.0
+388  2.23880601 681.8 682.5
+389  5.33333349 680.0 684.9
+390  2.77315593 685.6 679.5
+391  0.00000000 687.3 678.0
+392 17.72575188 682.4 684.3
+393  0.00000000 684.5 682.3
+394  0.00000000 680.4 688.2
+395  0.42553189 688.5 680.2
+396  6.06707335 682.2 687.4
+397 10.12759113 686.2 683.7
+398  3.37552738 692.2 679.9
+399  8.64854240 683.1 690.3
+400 12.34567928 693.8 681.3
+401  1.58959532 691.6 686.6
+402  1.49532712 693.5 688.6
+403 10.38552284 687.7 695.0
+404  6.13402033 693.7 690.1
+405  2.26628900 695.9 692.0
+406  2.47863245 693.6 694.9
+407  0.89362925 697.9 691.7
+408  2.42165232 695.1 695.3
+409  3.76569033 701.3 689.3
+410  1.96286476 697.4 695.7
+411  0.57803464 699.1 697.3
+412  2.80728388 695.4 701.1
+413  1.36363637 693.3 703.6
+414  1.16448331 698.3 699.9
+415  2.05040574 698.9 701.7
+416  5.99593496 700.9 707.7
+417  4.72610092 704.0 709.5
+418 24.26303864 648.3 641.7
+419  2.97029710 667.9 676.5
+420  5.00562429 660.5 651.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">as_tibble</span>(CASchools) <span class="ot">-&gt;</span> caschools</span>
+<span id="cb3-3"><a href="#cb3-3"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 420 × 14
+   district school  county grades stude…¹ teach…² calwo…³  lunch compu…⁴ expen…⁵
+   &lt;chr&gt;    &lt;chr&gt;   &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 75119    Sunol … Alame… KK-08      195   10.9    0.510   2.04      67   6385.
+ 2 61499    Manzan… Butte  KK-08      240   11.1   15.4    47.9      101   5099.
+ 3 61549    Therma… Butte  KK-08     1550   82.9   55.0    76.3      169   5502.
+ 4 61457    Golden… Butte  KK-08      243   14     36.5    77.0       85   7102.
+ 5 61523    Palerm… Butte  KK-08     1335   71.5   33.1    78.4      171   5236.
+ 6 62042    Burrel… Fresno KK-08      137    6.40  12.3    87.0       25   5580.
+ 7 68536    Holt U… San J… KK-08      195   10     12.9    94.6       28   5253.
+ 8 63834    Vinela… Kern   KK-08      888   42.5   18.8   100         66   4566.
+ 9 62331    Orange… Fresno KK-08      379   19     32.2    93.1       35   5356.
+10 67306    Del Pa… Sacra… KK-06     2247  108     79.0    87.3        0   5036.
+# … with 410 more rows, 4 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
+#   read &lt;dbl&gt;, math &lt;dbl&gt;, and abbreviated variable names ¹​students,
+#   ²​teachers, ³​calworks, ⁴​computer, ⁵​expenditure</code></pre>
+</div>
+</div>
+</section>
+<section id="estimating-the-coefficients" class="slide level2">
+<h2>Estimating the coefficients</h2>
+<ul>
+<li>Data description
+<ul>
+<li>Consists of class sizes and test scores in 1998-99 in 420 California districts.</li>
+<li><strong>Classes:</strong> 6th and 8th grade students</li>
+<li><strong>Class size:</strong> <span class="math inline">\(\frac{\text{Number of students in the district}}{\text{Number of teachers in the district}}\)</span> i.e.&nbsp;district wise student-teacher ratio.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><strong>Task:</strong> Summarize the Distribution of Student–teacher Ratios and Sixth-Grade test Scores for 420 K–6 Districts in California in 1998-99.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  variables Average `Standard Deviation` `Percentile 10%` `Percentile 25%`
+  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+1 str          19.2                 1.91             16.7             17.8
+2 testscr     340.                  6.57            331.             334. </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Steps:
+<ol type="1">
+<li>Find the categories or levels of the variables <code>grades</code>.</li>
+<li>Sample the 6th graders and create new variables <code>str</code> and <code>testscr</code>.</li>
+<li>Tidy the data into long format using the variables <code>str</code> and <code>testscr</code>, and then group them and summarize. You can use <code>sd()</code> for standard deviation, <code>quantile()</code> for percentiles, and <code>mean()</code> for average.</li>
+</ol></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ol type="1">
+<li>Categories of <code>grades</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Categories of `grades`.</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">levels</span>(caschools<span class="sc">$</span>grades)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "KK-06" "KK-08"</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="2" type="1">
+<li>Sample the 6th graders and create new variables <code>str</code> and <code>testscr</code>.</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># sample the 6th graders and create new variables "str" and "testscr".</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(grades <span class="sc">==</span> <span class="st">"KK-06"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">mutate</span>(<span class="at">str =</span> students<span class="sc">/</span>teachers,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>         <span class="at">testscr =</span> (english<span class="sc">+</span>math)<span class="sc">/</span><span class="dv">2</span>) <span class="ot">-&gt;</span> caschools</span>
+<span id="cb8-6"><a href="#cb8-6"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 61 × 16
+   district school   county grades stude…¹ teach…² calwo…³ lunch compu…⁴ expen…⁵
+   &lt;chr&gt;    &lt;chr&gt;    &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 67306    Del Pas… Sacra… KK-06     2247   108      79.0  87.3       0   5036.
+ 2 65961    Alisal … Monte… KK-06     7306   320.     17.0  88.0     742   4998.
+ 3 67199    Perris … River… KK-06     4258   221      24.7  92.7     324   5093.
+ 4 66142    Salinas… Monte… KK-06     9028   450.     14.0  69.9     669   5471.
+ 5 67421    Robla E… Sacra… KK-06     2253   113.     43.5  84.6     196   5526.
+ 6 67397    North S… Sacra… KK-06     5138   291.     58.8  85.0     560   5607.
+ 7 66423    Anaheim… Orange KK-06    20927   954.     10.9  82.4    1048   4969.
+ 8 68221    Nationa… San D… KK-06     6639   305.     26.8 100       505   5339.
+ 9 70904    Roselan… Sonoma KK-06     1154    62.1    22.9  84.9     129   6056.
+10 67231    Romolan… River… KK-06     1358    65      14.8  80.9     178   4897.
+# … with 51 more rows, 6 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
+#   read &lt;dbl&gt;, math &lt;dbl&gt;, str &lt;dbl&gt;, testscr &lt;dbl&gt;, and abbreviated variable
+#   names ¹​students, ²​teachers, ³​calworks, ⁴​computer, ⁵​expenditure</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<ol start="3" type="1">
+<li>Summarize</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># summarize</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(str, testscr), <span class="at">names_to =</span> <span class="st">"variables"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">group_by</span>(variables) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">summarise</span>(<span class="at">Average =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb10-6"><a href="#cb10-6"></a>            <span class="st">`</span><span class="at">Standard Deviation</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(value),</span>
+<span id="cb10-7"><a href="#cb10-7"></a>            <span class="st">`</span><span class="at">Percentile 10%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.1</span>),</span>
+<span id="cb10-8"><a href="#cb10-8"></a>            <span class="st">`</span><span class="at">Percentile 25%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.25</span>),</span>
+<span id="cb10-9"><a href="#cb10-9"></a>            <span class="at">Median =</span> <span class="fu">quantile</span>(value, <span class="fl">0.5</span>),</span>
+<span id="cb10-10"><a href="#cb10-10"></a>            <span class="st">`</span><span class="at">Percentile 75%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">quantile</span>(value, <span class="fl">0.75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  variables Average `Standard Deviation` `Percentile 10%` Perce…¹ Median Perce…²
+  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1 str          19.2                 1.91             16.7    17.8   19.3    20.4
+2 testscr     340.                  6.57            331.    334.   340.    345. 
+# … with abbreviated variable names ¹​`Percentile 25%`, ²​`Percentile 75%`</code></pre>
+</div>
+</div>
+<div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="LinearRegression_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="LinearRegression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="LinearRegression_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="LinearRegression_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
