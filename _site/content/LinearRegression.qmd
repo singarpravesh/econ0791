@@ -6,9 +6,8 @@ format:
     message: false
     echo: true
     scrollable: true
-    slide-number: c/t
+    slide-number: true
     touch: true
-    mouse-wheel: true
 ---
 
 ## Problem Statement
@@ -126,7 +125,7 @@ caschools %>%
        title = 'Scatterplot of test Score vs. Student–teacher Ratio (California School District Data)')
 ```
 
-- The correlation coefficient is `r round(cor(caschools$str, caschools$testscr))`
+- The correlation coefficient is `r round(cor(caschools$str, caschools$testscr),2)`
 ```{r}
 #| code-fold: true
 #| eval: false
