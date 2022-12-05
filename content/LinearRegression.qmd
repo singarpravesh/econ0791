@@ -8,6 +8,7 @@ format:
     scrollable: true
     slide-number: true
     touch: true
+    smaller: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -143,7 +144,7 @@ $$
 
 
 ```{r}
-lm(testscr ~ str, data = caschools)
+lm(testscr ~ str, data = caschools) 
 ```
 
 - Interpretation:
@@ -165,4 +166,24 @@ caschools %>%
 
 - The $R^2$ and the standard error of the regression measure how well the regression line fits the data.
 - The $R^2$ ranges between 0 and 1 and measures the fraction of the variance of $Y_i$ that is explained by $X_i$.
+  - An $R^2$ near 1 indicates that the regressor is good at predicting $Y_i$, while an $R^2$ near 0 indicates that the regressor is not  very good at predicting $Y_i$. 
 - The standard error of the regression measures how far $Y_i$ typically is from the predicted value.
+
+
+---
+
+- The regression summary of the linear regression
+```{r}
+#| code-fold: true
+lm(testscr ~ str, data = caschools) %>% 
+  summary()
+```
+
+- Interpretation
+  - The $R^2$ of 0.051 means that the regressor `str` explains $5.1$% of the variance of the dependent variable `testscre`.
+  -  The SER of 18.6 means that there is a large spread of the scatterplot around the regression line as measured in points on
+the test. 
+  - The low $R^2$ and high SER indicate that  the student–teacher ratio alone explains only a small part of the variation in test scores in these data.
+
+
+

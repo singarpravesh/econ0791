@@ -1845,7 +1845,7 @@ testscr = \beta_0 + \beta_1 str+ u
 \]</span></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1882,8 +1882,52 @@ Coefficients:
 <h2>Measures of fit</h2>
 <ul>
 <li>The <span class="math inline">\(R^2\)</span> and the standard error of the regression measure how well the regression line fits the data.</li>
-<li>The <span class="math inline">\(R^2\)</span> ranges between 0 and 1 and measures the fraction of the variance of <span class="math inline">\(Y_i\)</span> that is explained by <span class="math inline">\(X_i\)</span>.</li>
+<li>The <span class="math inline">\(R^2\)</span> ranges between 0 and 1 and measures the fraction of the variance of <span class="math inline">\(Y_i\)</span> that is explained by <span class="math inline">\(X_i\)</span>.
+<ul>
+<li>An <span class="math inline">\(R^2\)</span> near 1 indicates that the regressor is good at predicting <span class="math inline">\(Y_i\)</span>, while an <span class="math inline">\(R^2\)</span> near 0 indicates that the regressor is not very good at predicting <span class="math inline">\(Y_i\)</span>.</li>
+</ul></li>
 <li>The standard error of the regression measures how far <span class="math inline">\(Y_i\)</span> typically is from the predicted value.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>The regression summary of the linear regression</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = testscr ~ str, data = caschools)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-47.727 -14.251   0.483  12.822  48.540 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 698.9329     9.4675  73.825  &lt; 2e-16 ***
+str          -2.2798     0.4798  -4.751 2.78e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 18.58 on 418 degrees of freedom
+Multiple R-squared:  0.05124,   Adjusted R-squared:  0.04897 
+F-statistic: 22.58 on 1 and 418 DF,  p-value: 2.783e-06</code></pre>
+</div>
+</div>
+<ul>
+<li>Interpretation
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> of 0.051 means that the regressor <code>str</code> explains <span class="math inline">\(5.1\)</span>% of the variance of the dependent variable <code>testscre</code>.</li>
+<li>The SER of 18.6 means that there is a large spread of the scatterplot around the regression line as measured in points on the test.</li>
+<li>The low <span class="math inline">\(R^2\)</span> and high SER indicate that the student–teacher ratio alone explains only a small part of the variation in test scores in these data.</li>
+</ul></li>
 </ul>
 <div class="footer footer-default">
 
@@ -1915,13 +1959,13 @@ Coefficients:
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,
