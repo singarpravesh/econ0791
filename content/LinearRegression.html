@@ -7,7 +7,7 @@
 <link href="LinearRegression_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="LinearRegression_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="LinearRegression_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.1.251">
+  <meta name="generator" content="quarto-1.1.189">
 
   <title>Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -410,9 +410,8 @@ y = \beta_0 + \beta_1x+ u
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(AER) </span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">"AER"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">data</span>(<span class="st">'CASchools'</span>, <span class="at">package =</span> <span class="st">"AER"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>CASchools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data</span>(<span class="st">'CASchools'</span>, <span class="at">package =</span> <span class="st">"AER"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>CASchools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    district                                  school          county grades
 1      75119                      Sunol Glen Unified         Alameda  KK-08
@@ -1688,21 +1687,20 @@ y = \beta_0 + \beta_1x+ u
 <span id="cb3-3"><a href="#cb3-3"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 420 × 14
-   district school  county grades stude…¹ teach…² calwo…³  lunch compu…⁴ expen…⁵
-   &lt;chr&gt;    &lt;chr&gt;   &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 75119    Sunol … Alame… KK-08      195   10.9    0.510   2.04      67   6385.
- 2 61499    Manzan… Butte  KK-08      240   11.1   15.4    47.9      101   5099.
- 3 61549    Therma… Butte  KK-08     1550   82.9   55.0    76.3      169   5502.
- 4 61457    Golden… Butte  KK-08      243   14     36.5    77.0       85   7102.
- 5 61523    Palerm… Butte  KK-08     1335   71.5   33.1    78.4      171   5236.
- 6 62042    Burrel… Fresno KK-08      137    6.40  12.3    87.0       25   5580.
- 7 68536    Holt U… San J… KK-08      195   10     12.9    94.6       28   5253.
- 8 63834    Vinela… Kern   KK-08      888   42.5   18.8   100         66   4566.
- 9 62331    Orange… Fresno KK-08      379   19     32.2    93.1       35   5356.
-10 67306    Del Pa… Sacra… KK-06     2247  108     79.0    87.3        0   5036.
-# … with 410 more rows, 4 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
-#   read &lt;dbl&gt;, math &lt;dbl&gt;, and abbreviated variable names ¹​students,
-#   ²​teachers, ³​calworks, ⁴​computer, ⁵​expenditure</code></pre>
+   district school      county grades students teachers calworks  lunch computer
+   &lt;chr&gt;    &lt;chr&gt;       &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1 75119    Sunol Glen… Alame… KK-08       195    10.9     0.510   2.04       67
+ 2 61499    Manzanita … Butte  KK-08       240    11.1    15.4    47.9       101
+ 3 61549    Thermalito… Butte  KK-08      1550    82.9    55.0    76.3       169
+ 4 61457    Golden Fea… Butte  KK-08       243    14      36.5    77.0        85
+ 5 61523    Palermo Un… Butte  KK-08      1335    71.5    33.1    78.4       171
+ 6 62042    Burrel Uni… Fresno KK-08       137     6.40   12.3    87.0        25
+ 7 68536    Holt Union… San J… KK-08       195    10      12.9    94.6        28
+ 8 63834    Vineland E… Kern   KK-08       888    42.5    18.8   100          66
+ 9 62331    Orange Cen… Fresno KK-08       379    19      32.2    93.1        35
+10 67306    Del Paso H… Sacra… KK-06      2247   108      79.0    87.3         0
+# … with 410 more rows, and 5 more variables: expenditure &lt;dbl&gt;, income &lt;dbl&gt;,
+#   english &lt;dbl&gt;, read &lt;dbl&gt;, math &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1725,11 +1723,11 @@ y = \beta_0 + \beta_1x+ u
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
-  variables Average `Standard Deviation` `Percentile 10%` Perce…¹ Median Perce…²
-  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 str          19.6                 1.89             17.3    18.6   19.7    20.9
-2 testscr     335.                  8.60            324.    329.   334.    340. 
-# … with abbreviated variable names ¹​`Percentile 25%`, ²​`Percentile 75%`</code></pre>
+  variables Average `Standard Deviati…` `Percentile 10%` `Percentile 25%` Median
+  &lt;chr&gt;       &lt;dbl&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;
+1 str          19.6                1.89             17.3             18.6   19.7
+2 testscr     335.                 8.60            324.             329.   334. 
+# … with 1 more variable: `Percentile 75%` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <ul>
@@ -1761,26 +1759,25 @@ y = \beta_0 + \beta_1x+ u
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Create new variables "str" and "testscr".</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>caschools <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">mutate</span>(<span class="at">str =</span> students<span class="sc">/</span>teachers,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>         <span class="at">testscr =</span> (english<span class="sc">+</span>math)<span class="sc">/</span><span class="dv">2</span>) <span class="ot">-&gt;</span> caschools</span>
+<span id="cb6-4"><a href="#cb6-4"></a>         <span class="at">testscr =</span> (read<span class="sc">+</span>math)<span class="sc">/</span><span class="dv">2</span>) <span class="ot">-&gt;</span> caschools</span>
 <span id="cb6-5"><a href="#cb6-5"></a>caschools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 420 × 16
-   district school  county grades stude…¹ teach…² calwo…³  lunch compu…⁴ expen…⁵
-   &lt;chr&gt;    &lt;chr&gt;   &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1 75119    Sunol … Alame… KK-08      195   10.9    0.510   2.04      67   6385.
- 2 61499    Manzan… Butte  KK-08      240   11.1   15.4    47.9      101   5099.
- 3 61549    Therma… Butte  KK-08     1550   82.9   55.0    76.3      169   5502.
- 4 61457    Golden… Butte  KK-08      243   14     36.5    77.0       85   7102.
- 5 61523    Palerm… Butte  KK-08     1335   71.5   33.1    78.4      171   5236.
- 6 62042    Burrel… Fresno KK-08      137    6.40  12.3    87.0       25   5580.
- 7 68536    Holt U… San J… KK-08      195   10     12.9    94.6       28   5253.
- 8 63834    Vinela… Kern   KK-08      888   42.5   18.8   100         66   4566.
- 9 62331    Orange… Fresno KK-08      379   19     32.2    93.1       35   5356.
-10 67306    Del Pa… Sacra… KK-06     2247  108     79.0    87.3        0   5036.
-# … with 410 more rows, 6 more variables: income &lt;dbl&gt;, english &lt;dbl&gt;,
-#   read &lt;dbl&gt;, math &lt;dbl&gt;, str &lt;dbl&gt;, testscr &lt;dbl&gt;, and abbreviated variable
-#   names ¹​students, ²​teachers, ³​calworks, ⁴​computer, ⁵​expenditure</code></pre>
+   district school      county grades students teachers calworks  lunch computer
+   &lt;chr&gt;    &lt;chr&gt;       &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1 75119    Sunol Glen… Alame… KK-08       195    10.9     0.510   2.04       67
+ 2 61499    Manzanita … Butte  KK-08       240    11.1    15.4    47.9       101
+ 3 61549    Thermalito… Butte  KK-08      1550    82.9    55.0    76.3       169
+ 4 61457    Golden Fea… Butte  KK-08       243    14      36.5    77.0        85
+ 5 61523    Palermo Un… Butte  KK-08      1335    71.5    33.1    78.4       171
+ 6 62042    Burrel Uni… Fresno KK-08       137     6.40   12.3    87.0        25
+ 7 68536    Holt Union… San J… KK-08       195    10      12.9    94.6        28
+ 8 63834    Vineland E… Kern   KK-08       888    42.5    18.8   100          66
+ 9 62331    Orange Cen… Fresno KK-08       379    19      32.2    93.1        35
+10 67306    Del Paso H… Sacra… KK-06      2247   108      79.0    87.3         0
+# … with 410 more rows, and 7 more variables: expenditure &lt;dbl&gt;, income &lt;dbl&gt;,
+#   english &lt;dbl&gt;, read &lt;dbl&gt;, math &lt;dbl&gt;, str &lt;dbl&gt;, testscr &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1805,11 +1802,11 @@ y = \beta_0 + \beta_1x+ u
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
-  variables Average `Standard Deviation` `Percentile 10%` Perce…¹ Median Perce…²
-  &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1 str          19.6                 1.89             17.3    18.6   19.7    20.9
-2 testscr     335.                  8.60            324.    329.   334.    340. 
-# … with abbreviated variable names ¹​`Percentile 25%`, ²​`Percentile 75%`</code></pre>
+  variables Average `Standard Deviati…` `Percentile 10%` `Percentile 25%` Median
+  &lt;chr&gt;       &lt;dbl&gt;               &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;
+1 str          19.6                1.89             17.3             18.6   19.7
+2 testscr     654.                19.1             630.             640.   654. 
+# … with 1 more variable: `Percentile 75%` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1831,7 +1828,7 @@ y = \beta_0 + \beta_1x+ u
 
 </div>
 <img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"><ul>
-<li>The correlation coefficient is -0.01</li>
+<li>The correlation coefficient is -0.23</li>
 </ul>
 <div class="cell">
 <details>
@@ -1839,6 +1836,55 @@ y = \beta_0 + \beta_1x+ u
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">cor</span>(caschools<span class="sc">$</span>str, caschools<span class="sc">$</span>testscr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="ols-estimates" class="slide level2 smaller">
+<h2>OLS Estimates</h2>
+<ul>
+<li>The OLS equation to be estimated <span class="math display">\[
+testscr = \beta_0 + \beta_1 str+ u
+\]</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = testscr ~ str, data = caschools)
+
+Coefficients:
+(Intercept)          str  
+     698.93        -2.28  </code></pre>
+</div>
+</div>
+<ul>
+<li>Interpretation:
+<ul>
+<li>The slope of -2.28 means that an increase in the student–teacher ratio by one student per class is, on average, associated with a decline in districtwide test scores by 2.28 points on the test.</li>
+<li>The negative slope indicates that more students per teacher (larger classes) is associated with poorer performance on the test.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-estimated-regression-line-for-the-california-data" class="slide level2 smaller">
+<h2>The estimated Regression Line for the California Data</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(str, testscr))<span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>              <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section id="measures-of-fit" class="slide level2 smaller">
+<h2>Measures of fit</h2>
+<ul>
+<li>The <span class="math inline">\(R^2\)</span> and the standard error of the regression measure how well the regression line fits the data.</li>
+<li>The <span class="math inline">\(R^2\)</span> ranges between 0 and 1 and measures the fraction of the variance of <span class="math inline">\(Y_i\)</span> that is explained by <span class="math inline">\(X_i\)</span>.</li>
+<li>The standard error of the regression measures how far <span class="math inline">\(Y_i\)</span> typically is from the predicted value.</li>
+</ul>
 <div class="footer footer-default">
 
 </div>
