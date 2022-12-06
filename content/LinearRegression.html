@@ -1929,10 +1929,103 @@ F-statistic: 22.58 on 1 and 418 DF,  p-value: 2.783e-06</code></pre>
 <li>The low <span class="math inline">\(R^2\)</span> and high SER indicate that the student–teacher ratio alone explains only a small part of the variation in test scores in these data.</li>
 </ul></li>
 </ul>
+</section>
+<section id="the-least-squares-assumptions" class="slide level2">
+<h2>The Least Squares assumptions</h2>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1X_i+ u_i, i = 1, 2, ..., n
+\]</span></p>
+<ol type="1">
+<li>The error term <span class="math inline">\(u_i\)</span> has conditional mean zero given <span class="math inline">\(X_i\)</span>: <span class="math inline">\(E(u_i|X_i) = 0\)</span></li>
+<li><span class="math inline">\((X_i, Y_i)\)</span> are independently and identically distributed (i.i.d)</li>
+<li>Large outliers are unlikely.</li>
+</ol>
+</section>
+<section id="exercises" class="slide level2">
+<h2>Exercises</h2>
+<p>The file <a href="LinearRegression_files/Growth.xlsx">Growth</a>, contains data on average growth rates from 1960 through 1995 for 65 countries, along with variables that are potentially related to growth. A detailed description is given in <a href="LinearRegression_files/Growth_Description.pdf">Growth_Description</a>. In this exercise, you will investigate the relationship between growth and trade.</p>
+<ol type="a">
+<li><p>Construct a scatterplot of average annual growth rate (Growth) on the average trade share (TradeShare). Does there appear to be a relationship between the variables?</p></li>
+<li><p>One country, Malta, has a trade share much larger than the other countries. Find Malta on the scatterplot. Does Malta look like an outlier?</p></li>
+<li><p>Using all observations, run a regression of Growth on TradeShare. What is the estimated slope? What is the estimated intercept? Use the regression to predict the growth rate for a country with a trade share of 0.5 and with a trade share equal to 1.0.</p></li>
+<li><p>Estimate the same regression, excluding the data from Malta. Answer the same questions in (c).</p></li>
+<li><p>Plot the estimated regression functions from (c) and (d). Using the scatterplot in (a), explain why the regression function that includes Malta is steeper than the regression function that excludes Malta.</p></li>
+<li><p>Where is Malta? Why is the Malta trade share so large? Should Malta be included or excluded from the analysis?</p></li>
+</ol>
+</section>
+<section>
+<section id="regression-with-a-single-regressor-hypothesis-tests-and-confidence-intervals" class="title-slide slide level1 center">
+<h1>Regression with a Single Regressor: Hypothesis Tests and Confidence Intervals</h1>
+
+</section>
+<section class="slide level2">
+
+<p><strong>Testing Hypotheses About One of the Regression Coefficients</strong></p>
+<ul>
+<li>An angry taxpayer asserts that cutting class size will not help boost test scores, so reducing them is a waste of money.</li>
+<li>Class size, the taxpayer claims, has no effect on test scores.</li>
+<li>Can you reject the taxpayer’s hypothesis that <span class="math inline">\(\beta_{ClassSize} = 0\)</span>, or should you accept it, at least tentatively pending further new evidence?</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><strong>Two-Sided Hypotheses Concerning <span class="math inline">\(\beta_1\)</span></strong></p>
+<ul>
+<li>The null hypothesis that the mean of <span class="math inline">\(Y\)</span> is a specific value <span class="math inline">\(\mu_{Y,0}\)</span> can be written as <span class="math inline">\(H_0: E(Y) = \mu_{Y,0}\)</span>, and the two-sided alternative is <span class="math inline">\(H_1: E(Y) \neq \mu_{Y,0}\)</span>.</li>
+<li>Testing the Hypothesis <span class="math inline">\(\beta_1 = \beta_{1,0}\)</span> against the alternative <span class="math inline">\(\beta_1 \neq \beta_{1,0}\)</span></li>
+</ul>
+<ol type="1">
+<li>Compute the standard error of <span class="math inline">\(\hat\beta_1\)</span>, <span class="math inline">\(SE(\hat\beta_1)\)</span>.</li>
+<li>Compute the <span class="math inline">\(t\)</span>-statistic.</li>
+<li>Compute the <span class="math inline">\(p\)</span>-value. Reject the hypothesis at the 5% significance level if the <span class="math inline">\(p\)</span>-value is less than 0.05 or, equivalently, if <span class="math inline">\(t^{act}&gt;1.96\)</span>.</li>
+</ol>
+<ul>
+<li>The standard error and (typically) the <span class="math inline">\(t\)</span>-statistic and <span class="math inline">\(p\)</span>-value testing <span class="math inline">\(\beta_1 = 0\)</span> are computed automatically by regression software.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><strong>Application to the test scores data</strong></p>
+<ul>
+<li>Recall our regression estimates</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Now, we shall look at the standard way of printing the results</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">stargazer</span>(<span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===============================================
+                        Dependent variable:    
+                    ---------------------------
+                              testscr          
+-----------------------------------------------
+str                          -2.280***         
+                              (0.480)          
+                                               
+Constant                    698.933***         
+                              (9.467)          
+                                               
+-----------------------------------------------
+Observations                    420            
+R2                             0.051           
+Adjusted R2                    0.049           
+Residual Std. Error      18.581 (df = 418)     
+F Statistic           22.575*** (df = 1; 418)  
+===============================================
+Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
