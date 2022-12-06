@@ -186,4 +186,14 @@ the test.
   - The low $R^2$ and high SER indicate that  the student–teacher ratio alone explains only a small part of the variation in test scores in these data.
 
 
+## The Least Squares assumptions
+
+$$
+Y_i = \beta_0 + \beta_1X_i+ u_i, i = 1, 2, ..., n
+$$
+
+1. The error term $u_i$ has conditional mean zero given $X_i$: $E(u_i|X_i) = 0$
+2. $(X_i, Y_i)$ are independently and identically distributed (i.i.d)
+3. Large outliers are unlikely.
+
 
