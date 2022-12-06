@@ -8,7 +8,6 @@ format:
     scrollable: true
     slide-number: true
     touch: true
-    smaller: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -170,7 +169,7 @@ caschools %>%
 - The standard error of the regression measures how far $Y_i$ typically is from the predicted value.
 
 
----
+## {.smaller}
 
 - The regression summary of the linear regression
 ```{r}
@@ -197,7 +196,7 @@ $$
 3. Large outliers are unlikely.
 
 
-## Exercises
+## Exercises {.smaller}
 
 The file [Growth](LinearRegression_files/Growth.xlsx), contains data on average growth rates from 1960 through 1995 for 65 countries, along with variables that are potentially related to growth. A detailed description is given in [Growth_Description](LinearRegression_files/Growth_Description.pdf). In this exercise, you will investigate the relationship   between growth and trade.
 
@@ -215,30 +214,40 @@ f. Where is Malta? Why is the Malta trade share so large? Should Malta be includ
 
 # Regression with a Single Regressor: Hypothesis Tests and Confidence Intervals
 
----
-
-**Testing Hypotheses About One of the Regression Coefficients**
+## Testing Hypotheses About One of the Regression Coefficients
 
 - An angry taxpayer asserts that cutting class size will not help boost test scores, so reducing them is a waste of money. 
 - Class size, the taxpayer claims, has no effect on test scores.
 - Can you reject the taxpayer’s hypothesis that $\beta_{ClassSize} = 0$, or should you accept it, at least tentatively pending further new evidence?
 
----
 
-**Two-Sided Hypotheses Concerning $\beta_1$**
+## Two-Sided Hypotheses Concerning $\beta_1$ {.smaller}
 
 - The null hypothesis that the mean of $Y$ is a specific value $\mu_{Y,0}$ can be written as $H_0: E(Y) = \mu_{Y,0}$, and the two-sided alternative is $H_1: E(Y) \neq \mu_{Y,0}$.
 - Testing the Hypothesis $\beta_1 = \beta_{1,0}$ against the alternative $\beta_1 \neq \beta_{1,0}$
 
 1. Compute the standard error of $\hat\beta_1$, $SE(\hat\beta_1)$.
+$$SE(\hat{\beta}_1) = \sqrt{ \hat{\sigma}^2_{\hat{\beta}_1} } \ \ , \ \ 
+  \hat{\sigma}^2_{\hat{\beta}_1} = \frac{1}{n} \times \frac{\frac{1}{n-2} \sum_{i=1}^n (X_i - \overline{X})^2 \hat{u_i}^2 }{ \left[ \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X})^2 \right]^2}$$.
 2. Compute the $t$-statistic.
-3. Compute the $p$-value. Reject the hypothesis at the 5% significance level if the $p$-value is less than 0.05 or, equivalently, if $t^{act}>1.96$.
+$$
+t = \frac{\hat{\beta}_1 - \beta_{1,0}}{ SE(\hat{\beta}_1) }.
+$$
+3. Compute the $p$-value. Reject the hypothesis at the 5% significance level if the $p$-value is less than 0.05 or, equivalently, if $|t^{act}|>1.96$.
+$$
+\begin{align*}
+    p \text{-value} =& \, \text{Pr}_{H_0} \left[ \left| \frac{ \hat{\beta}_1 - \beta_{1,0} }{ SE(\hat{\beta}_1) } \right| > \left|        \frac{ \hat{\beta}_1^{act} - \beta_{1,0} }{ SE(\hat{\beta}_1) } \right| \right] \\
+    =& \, \text{Pr}_{H_0} (|t| > |t^{act}|) \\
+    \approx& \, 2 \cdot \Phi(-|t^{act}|)
+  \end{align*}
+$$
 
-- The standard error and (typically) the $t$-statistic and $p$-value testing $\beta_1 = 0$ are computed automatically by regression software.
 
----
 
-**Application to the test scores data**
+
+
+
+## Application to the test scores data {.smaller}
 
 - Recall our regression estimates
 ```{r}
@@ -252,6 +261,117 @@ library(stargazer)
 lm(testscr ~ str, data = caschools) %>% 
   stargazer(type = "text")
 ```
+
+## {.smaller}
+
+- Suppose you wish to test the null hypothesis that the slope $\beta_1 = 0$ **(two-sided test)** at the 5% significance level.  $H_0: \beta_1 =0, H_1:\beta_1 \neq 0 $
+```{r}
+# the linear model
+(model1 <- lm(testscr ~ str, data = caschools))
+
+# the coefficient on str
+(beta1 <- coef(model1)[[2]])
+
+# the standard error of beta 1
+(se_beta1 <- vcov(model1) %>% diag() %>% sqrt())
+
+# degrees of freedom
+(df <- model1$df.residual)
+
+# the t statistic
+(t <- (beta1 - 0)/se_beta1)
+
+# critical value of t
+alpha <- 0.05
+(t_cri <- qt(1 - alpha/2, df))
+```
+
+- Interpretation
+  - Since *|t| > t_cri*, the *t* value falls in the rejection region, so we reject the hull hypothesis. 
+  
+---
+
+```{r}
+#| code-fold: true
+ggplot(tibble(-4:4), aes(x=-4:4))+
+  geom_function(aes(x=-4:4),fun = dnorm)+
+  geom_vline(xintercept = t[[2]], lty = 2)+
+  geom_vline(xintercept = t_cri, col = 'red', lty = 2)+
+  geom_vline(xintercept = -t_cri, col = 'red', lty = 2)+
+  annotate("text", x = t[[2]]+0.3, y = 0.4, label = "t = -4.75")+
+  annotate("text", x = t_cri+0.5, y = 0.4, label = "t_cri = 1.96")+
+  annotate("text", x = - t_cri+0.5, y = 0.4, label = "t_cri = -1.96")+
+  labs(x = "t",
+       y = "density",
+       title = "Two-tail test")
+```
+
+
+---
+
+- Calculating the $p$-value for two-tail test
+```{r}
+(p <- 2*(1 - pt(abs(t), df)))[[2]]
+```
+
+- Since the $p$-value is less than 0.05 we reject the null hypotheses that $\beta_1  = 0$.
+
+
+## {.smaller}
+
+- Now you wish to test the null hypothesis that the slope $\beta_1<3$ **(one-sided test)** at the 5% significance level. $H_0: \beta_1 \geq3, H_1:\beta_1<3$
+- All the values of $\beta_1, SE(\beta_1), \text{ and }df$ remain the same. We just need to calculate the one-sided *t* and the critical value and interpret.
+```{r}
+
+# critical value of t 
+alpha <- 0.05
+(t_one <- (beta1 - 3)/se_beta1)
+(t_cri_one <- qt(1 - alpha, df))
+```
+
+---
+
+```{r}
+#| code-fold: true
+ggplot(tibble(-4:4), aes(x=-4:4))+
+  geom_function(aes(x=-4:4),fun = dnorm)+
+  geom_vline(xintercept = t_one[[2]], lty = 2)+
+  geom_vline(xintercept = -t_cri_one, col = 'red', lty = 2)+
+  annotate("text", x = t_one[[2]]+0.7, y = 0.4, label = paste0("t = ", round(t_one[[2]], 3) ))+
+  annotate("text", x = -t_cri_one+0.6, y = 0.4, label = paste0("t = ", round(-t_cri_one, 3) ))+
+  labs(x = "t",
+       y = "density",
+       title = "Left-tail test")
+```
+
+
+---
+
+- Calculating the $p$-value for one-tail (left) test. $H_0: \beta_1 \geq3, H_1:\beta_1<3$
+```{r}
+(p_left <- pt(t_one, df))[[2]]
+```
+
+  - Since the $p$-value is less than 0.05 we reject the null hypotheses that $\beta_1  \geq 3$.
+
+- Calculating the $p$-value for one-tail (right) test. $H_0: \beta_1 \leq3, H_1:\beta_1>3$
+```{r}
+(p_left <- 1 - pt(t_one, df))[[2]]
+```
+
+  - Since the $p$-value is greater than 0.05 we accept the null hypotheses that $\beta_1  \leq 3$.
+
+## Confidence interval  for $\beta_1$
+
+95% confidence interval for $\beta_1 = [\hat\beta_1-1.96SE(\hat\beta_1),\hat\beta_1+1.96SE(\hat\beta_1)]$ 
+
+- For our `model1` we can construct the 95% CI as follows
+```{r}
+lower_ci_model1 <- beta1 - 1.96*se_beta1[[2]]
+upper_ci_model1 <- beta1 + 1.96*se_beta1[[2]]
+(ci_model1 <- tibble(lower_ci_model1, upper_ci_model1))
+```
+
 
 
 

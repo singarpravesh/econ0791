@@ -1889,8 +1889,8 @@ Coefficients:
 <li>The standard error of the regression measures how far <span class="math inline">\(Y_i\)</span> typically is from the predicted value.</li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="section-3" class="slide level2 smaller">
+<h2></h2>
 <ul>
 <li>The regression summary of the linear regression</li>
 </ul>
@@ -1941,7 +1941,7 @@ Y_i = \beta_0 + \beta_1X_i+ u_i, i = 1, 2, ..., n
 <li>Large outliers are unlikely.</li>
 </ol>
 </section>
-<section id="exercises" class="slide level2">
+<section id="exercises" class="slide level2 smaller">
 <h2>Exercises</h2>
 <p>The file <a href="LinearRegression_files/Growth.xlsx">Growth</a>, contains data on average growth rates from 1960 through 1995 for 65 countries, along with variables that are potentially related to growth. A detailed description is given in <a href="LinearRegression_files/Growth_Description.pdf">Growth_Description</a>. In this exercise, you will investigate the relationship between growth and trade.</p>
 <ol type="a">
@@ -1958,34 +1958,37 @@ Y_i = \beta_0 + \beta_1X_i+ u_i, i = 1, 2, ..., n
 <h1>Regression with a Single Regressor: Hypothesis Tests and Confidence Intervals</h1>
 
 </section>
-<section class="slide level2">
-
-<p><strong>Testing Hypotheses About One of the Regression Coefficients</strong></p>
+<section id="testing-hypotheses-about-one-of-the-regression-coefficients" class="slide level2">
+<h2>Testing Hypotheses About One of the Regression Coefficients</h2>
 <ul>
 <li>An angry taxpayer asserts that cutting class size will not help boost test scores, so reducing them is a waste of money.</li>
 <li>Class size, the taxpayer claims, has no effect on test scores.</li>
 <li>Can you reject the taxpayer’s hypothesis that <span class="math inline">\(\beta_{ClassSize} = 0\)</span>, or should you accept it, at least tentatively pending further new evidence?</li>
 </ul>
 </section>
-<section class="slide level2">
-
-<p><strong>Two-Sided Hypotheses Concerning <span class="math inline">\(\beta_1\)</span></strong></p>
+<section id="two-sided-hypotheses-concerning-beta_1" class="slide level2 smaller">
+<h2>Two-Sided Hypotheses Concerning <span class="math inline">\(\beta_1\)</span></h2>
 <ul>
 <li>The null hypothesis that the mean of <span class="math inline">\(Y\)</span> is a specific value <span class="math inline">\(\mu_{Y,0}\)</span> can be written as <span class="math inline">\(H_0: E(Y) = \mu_{Y,0}\)</span>, and the two-sided alternative is <span class="math inline">\(H_1: E(Y) \neq \mu_{Y,0}\)</span>.</li>
 <li>Testing the Hypothesis <span class="math inline">\(\beta_1 = \beta_{1,0}\)</span> against the alternative <span class="math inline">\(\beta_1 \neq \beta_{1,0}\)</span></li>
 </ul>
 <ol type="1">
-<li>Compute the standard error of <span class="math inline">\(\hat\beta_1\)</span>, <span class="math inline">\(SE(\hat\beta_1)\)</span>.</li>
-<li>Compute the <span class="math inline">\(t\)</span>-statistic.</li>
-<li>Compute the <span class="math inline">\(p\)</span>-value. Reject the hypothesis at the 5% significance level if the <span class="math inline">\(p\)</span>-value is less than 0.05 or, equivalently, if <span class="math inline">\(t^{act}&gt;1.96\)</span>.</li>
+<li>Compute the standard error of <span class="math inline">\(\hat\beta_1\)</span>, <span class="math inline">\(SE(\hat\beta_1)\)</span>. <span class="math display">\[SE(\hat{\beta}_1) = \sqrt{ \hat{\sigma}^2_{\hat{\beta}_1} } \ \ , \ \
+  \hat{\sigma}^2_{\hat{\beta}_1} = \frac{1}{n} \times \frac{\frac{1}{n-2} \sum_{i=1}^n (X_i - \overline{X})^2 \hat{u_i}^2 }{ \left[ \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X})^2 \right]^2}\]</span>.</li>
+<li>Compute the <span class="math inline">\(t\)</span>-statistic. <span class="math display">\[
+t = \frac{\hat{\beta}_1 - \beta_{1,0}}{ SE(\hat{\beta}_1) }.
+\]</span></li>
+<li>Compute the <span class="math inline">\(p\)</span>-value. Reject the hypothesis at the 5% significance level if the <span class="math inline">\(p\)</span>-value is less than 0.05 or, equivalently, if <span class="math inline">\(|t^{act}|&gt;1.96\)</span>. <span class="math display">\[
+\begin{align*}
+p \text{-value} =&amp; \, \text{Pr}_{H_0} \left[ \left| \frac{ \hat{\beta}_1 - \beta_{1,0} }{ SE(\hat{\beta}_1) } \right| &gt; \left|        \frac{ \hat{\beta}_1^{act} - \beta_{1,0} }{ SE(\hat{\beta}_1) } \right| \right] \\
+=&amp; \, \text{Pr}_{H_0} (|t| &gt; |t^{act}|) \\
+\approx&amp; \, 2 \cdot \Phi(-|t^{act}|)
+  \end{align*}
+\]</span></li>
 </ol>
-<ul>
-<li>The standard error and (typically) the <span class="math inline">\(t\)</span>-statistic and <span class="math inline">\(p\)</span>-value testing <span class="math inline">\(\beta_1 = 0\)</span> are computed automatically by regression software.</li>
-</ul>
 </section>
-<section class="slide level2">
-
-<p><strong>Application to the test scores data</strong></p>
+<section id="application-to-the-test-scores-data" class="slide level2 smaller">
+<h2>Application to the test scores data</h2>
 <ul>
 <li>Recall our regression estimates</li>
 </ul>
@@ -2022,6 +2025,175 @@ F Statistic           22.575*** (df = 1; 418)
 Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 </div>
 </div>
+</section>
+<section id="section-4" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li>Suppose you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1 = 0\)</span> <strong>(two-sided test)</strong> at the 5% significance level. $H_0: _1 =0, H_1:_1 $</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># the linear model</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>(model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(testscr <span class="sc">~</span> str, <span class="at">data =</span> caschools))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = testscr ~ str, data = caschools)
+
+Coefficients:
+(Intercept)          str  
+     698.93        -2.28  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># the coefficient on str</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>(beta1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(model1)[[<span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.279808</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># the standard error of beta 1</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>(se_beta1 <span class="ot">&lt;-</span> <span class="fu">vcov</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">diag</span>() <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         str 
+  9.4674911   0.4798255 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># degrees of freedom</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>(df <span class="ot">&lt;-</span> model1<span class="sc">$</span>df.residual)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 418</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># the t statistic</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>(t <span class="ot">&lt;-</span> (beta1 <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">/</span>se_beta1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         str 
+ -0.2408038  -4.7513271 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># critical value of t</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>(t_cri <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>, df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.965655</code></pre>
+</div>
+</div>
+<ul>
+<li>Interpretation
+<ul>
+<li>Since <em>|t| &gt; t_cri</em>, the <em>t</em> value falls in the rejection region, so we reject the hull hypothesis.</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">aes</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>))<span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">fun =</span> dnorm)<span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t[[<span class="dv">2</span>]], <span class="at">lty =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_cri, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="sc">-</span>t_cri, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> t[[<span class="dv">2</span>]]<span class="sc">+</span><span class="fl">0.3</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="st">"t = -4.75"</span>)<span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> t_cri<span class="fl">+0.5</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="st">"t_cri = 1.96"</span>)<span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span> t_cri<span class="fl">+0.5</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="st">"t_cri = -1.96"</span>)<span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t"</span>,</span>
+<span id="cb32-10"><a href="#cb32-10"></a>       <span class="at">y =</span> <span class="st">"density"</span>,</span>
+<span id="cb32-11"><a href="#cb32-11"></a>       <span class="at">title =</span> <span class="st">"Two-tail test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<ul>
+<li>Calculating the <span class="math inline">\(p\)</span>-value for two-tail test</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>(p <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t), df)))[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.783308e-06</code></pre>
+</div>
+</div>
+<ul>
+<li>Since the <span class="math inline">\(p\)</span>-value is less than 0.05 we reject the null hypotheses that <span class="math inline">\(\beta_1 = 0\)</span>.</li>
+</ul>
+</section>
+<section id="section-5" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li>Now you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1&lt;3\)</span> <strong>(one-sided test)</strong> at the 5% significance level. <span class="math inline">\(H_0: \beta_1 \geq3, H_1:\beta_1&lt;3\)</span></li>
+<li>All the values of <span class="math inline">\(\beta_1, SE(\beta_1), \text{ and }df\)</span> remain the same. We just need to calculate the one-sided <em>t</em> and the critical value and interpret.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># critical value of t </span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>(t_one <span class="ot">&lt;-</span> (beta1 <span class="sc">-</span> <span class="dv">3</span>)<span class="sc">/</span>se_beta1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         str 
+ -0.5576776 -11.0035994 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>(t_cri_one <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha, df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.648507</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>), <span class="fu">aes</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>))<span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>),<span class="at">fun =</span> dnorm)<span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_one[[<span class="dv">2</span>]], <span class="at">lty =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="sc">-</span>t_cri_one, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lty =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> t_one[[<span class="dv">2</span>]]<span class="sc">+</span><span class="fl">0.7</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"t = "</span>, <span class="fu">round</span>(t_one[[<span class="dv">2</span>]], <span class="dv">3</span>) ))<span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>t_cri_one<span class="fl">+0.6</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"t = "</span>, <span class="fu">round</span>(<span class="sc">-</span>t_cri_one, <span class="dv">3</span>) ))<span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"t"</span>,</span>
+<span id="cb39-8"><a href="#cb39-8"></a>       <span class="at">y =</span> <span class="st">"density"</span>,</span>
+<span id="cb39-9"><a href="#cb39-9"></a>       <span class="at">title =</span> <span class="st">"Left-tail test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<ul>
+<li>Calculating the <span class="math inline">\(p\)</span>-value for one-tail (left) test. <span class="math inline">\(H_0: \beta_1 \geq3, H_1:\beta_1&lt;3\)</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>(p_left <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_one, df))[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.321304e-25</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Since the <span class="math inline">\(p\)</span>-value is less than 0.05 we reject the null hypotheses that <span class="math inline">\(\beta_1 \geq 3\)</span>.</p></li>
+<li><p>Calculating the <span class="math inline">\(p\)</span>-value for one-tail (right) test. <span class="math inline">\(H_0: \beta_1 \leq3, H_1:\beta_1&gt;3\)</span></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>(p_left <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_one, df))[[<span class="dv">2</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<ul>
+<li>Since the <span class="math inline">\(p\)</span>-value is greater than 0.05 we accept the null hypotheses that <span class="math inline">\(\beta_1 \leq 3\)</span>.</li>
+</ul>
+</section>
+<section id="confidence-interval-for-beta_1" class="slide level2">
+<h2>Confidence interval for <span class="math inline">\(\beta_1\)</span></h2>
+<p>95% confidence interval for <span class="math inline">\(\beta_1 = [\hat\beta_1-1.96SE(\hat\beta_1),\hat\beta_1+1.96SE(\hat\beta_1)]\)</span></p>
+<ul>
+<li>For our <code>model1</code> we can construct the 95% CI as follows</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>lower_ci_model1 <span class="ot">&lt;-</span> beta1 <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se_beta1[[<span class="dv">2</span>]]</span>
+<span id="cb44-2"><a href="#cb44-2"></a>upper_ci_model1 <span class="ot">&lt;-</span> beta1 <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se_beta1[[<span class="dv">2</span>]]</span>
+<span id="cb44-3"><a href="#cb44-3"></a>(ci_model1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(lower_ci_model1, upper_ci_model1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  lower_ci_model1 upper_ci_model1
+            &lt;dbl&gt;           &lt;dbl&gt;
+1           -3.22           -1.34</code></pre>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
@@ -2052,13 +2224,13 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
+'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': true,
+'smaller': false,
  
         // Display controls in the bottom right corner
         controls: false,
