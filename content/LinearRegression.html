@@ -2029,7 +2029,7 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <section id="section-4" class="slide level2 smaller">
 <h2></h2>
 <ul>
-<li>Suppose you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1 = 0\)</span> <strong>(two-sided test)</strong> at the 5% significance level. $H_0: _1 =0, H_1:_1 $</li>
+<li>Suppose you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1 = 0\)</span> <strong>(two-sided test)</strong> at the 5% significance level. $H_0: _1 =0, H_1: _1 $</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># the linear model</span></span>
@@ -2075,7 +2075,7 @@ Coefficients:
 <ul>
 <li>Interpretation
 <ul>
-<li>Since <em>|t| &gt; t_cri</em>, the <em>t</em> value falls in the rejection region, so we reject the hull hypothesis.</li>
+<li>Since <em>|t| &gt; t_cri</em>, the <em>t</em> value falls in the rejection region, so we reject the null hypothesis.</li>
 </ul></li>
 </ul>
 </section>
@@ -2194,6 +2194,90 @@ Coefficients:
 1           -3.22           -1.34</code></pre>
 </div>
 </div>
+</section>
+<section id="regression-when-x-is-a-binary-variable" class="slide level2 smaller">
+<h2>Regression when <em>X</em> is a binary variable</h2>
+<ul>
+<li>Regression analysis can also be used when the regressor is binary—that is, when it takes on only two values, 0 or 1.</li>
+<li>For example, X might be a worker’s gender (=1 if female, = 0 if male), whether a school district is urban or rural (= 1 if urban, = 0 if rural), or whether the district’s class size is small or large (= 1 if small, = 0 if large).</li>
+<li>A binary variable is also called an indicator variable or sometimes a dummy variable.</li>
+<li>In R we call them factors.</li>
+</ul>
+</section>
+<section id="section-6" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li><p>Suppose you have a variable <span class="math inline">\(D_i\)</span> that equals either 0 or 1, depending on whether the student–teacher ratio is less than 20: <span class="math display">\[
+D_i = \begin{cases} 1 \text{ if $STR$ in $i^{th}$ school district &lt; 20} \\
+0 \text{ if $STR$ in $i^{th}$ school district $\geq$ 20} \end{cases}
+\]</span></p></li>
+<li><p>The regression model now is <span class="math display">\[
+testscr = \beta_0 + \beta_1D_i+u_i
+\]</span></p></li>
+</ul>
+<ul>
+<li class="fragment">Your task: Create the dummy variable and make an appropriate plot to look at both these variables <span class="math inline">\(D_i\)</span> and <span class="math inline">\(testscr\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># create a new factor variable D</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="fu">mutate</span>(<span class="at">D =</span> <span class="fu">factor</span>(</span>
+<span id="cb46-4"><a href="#cb46-4"></a>              <span class="fu">if_else</span>(str <span class="sc">&lt;</span> <span class="dv">20</span>,<span class="dv">1</span>,<span class="dv">0</span>))) <span class="ot">-&gt;</span> caschools</span>
+<span id="cb46-5"><a href="#cb46-5"></a></span>
+<span id="cb46-6"><a href="#cb46-6"></a><span class="co"># plot D and testscr</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a>caschools <span class="sc">%&gt;%</span> </span>
+<span id="cb46-8"><a href="#cb46-8"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> testscr))<span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<section id="section-7" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li>Now, let’s estimate the regression equation <span class="math display">\[
+testscr = \beta_0 + \beta_1D_i+u_i
+\]</span></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">lm</span>(testscr <span class="sc">~</span> D, <span class="at">data =</span> caschools) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>  stargazer<span class="sc">::</span><span class="fu">stargazer</span>(<span class="at">type =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===============================================
+                        Dependent variable:    
+                    ---------------------------
+                              testscr          
+-----------------------------------------------
+D1                           7.169***          
+                              (1.847)          
+                                               
+Constant                    650.077***         
+                              (1.393)          
+                                               
+-----------------------------------------------
+Observations                    420            
+R2                             0.035           
+Adjusted R2                    0.032           
+Residual Std. Error      18.741 (df = 418)     
+F Statistic           15.073*** (df = 1; 418)  
+===============================================
+Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+</div>
+</div>
+<ul>
+<li>Interpretation
+<ul>
+<li>The average test score for the subsample with student–teacher ratios greater than or equal to 20 (that is, for which D = 0) is 650.0, and the average test score for the subsample with student– teacher ratios less than 20 (so D = 1) is 650.0 + 7.4 = 657.4.</li>
+<li>The difference between the sample average test scores for the two groups is 7.4. This is the OLS estimate of <span class="math inline">\(\beta_1\)</span>, the coefficient on the student–teacher ratio binary variable D.</li>
+</ul></li>
+</ul>
 <div class="footer footer-default">
 
 </div>

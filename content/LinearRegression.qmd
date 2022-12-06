@@ -264,7 +264,7 @@ lm(testscr ~ str, data = caschools) %>%
 
 ## {.smaller}
 
-- Suppose you wish to test the null hypothesis that the slope $\beta_1 = 0$ **(two-sided test)** at the 5% significance level.  $H_0: \beta_1 =0, H_1:\beta_1 \neq 0 $
+- Suppose you wish to test the null hypothesis that the slope $\beta_1 = 0$ **(two-sided test)** at the 5% significance level.  $H_0: \beta_1 =0, H_1: \beta_1 \neq 0 $
 ```{r}
 # the linear model
 (model1 <- lm(testscr ~ str, data = caschools))
@@ -287,7 +287,7 @@ alpha <- 0.05
 ```
 
 - Interpretation
-  - Since *|t| > t_cri*, the *t* value falls in the rejection region, so we reject the hull hypothesis. 
+  - Since *|t| > t_cri*, the *t* value falls in the rejection region, so we reject the null hypothesis. 
   
 ---
 
@@ -372,6 +372,58 @@ upper_ci_model1 <- beta1 + 1.96*se_beta1[[2]]
 (ci_model1 <- tibble(lower_ci_model1, upper_ci_model1))
 ```
 
+## Regression when *X* is a binary variable {.smaller}
+
+- Regression analysis can also be used when the regressor is binary—that is, when it takes on only two values, 0 or 1. 
+- For example, X might be a worker’s gender (=1 if female, = 0 if male), whether a school district is urban or rural (= 1 if urban, = 0 if rural), or whether the district’s class size is small or large (= 1 if small, = 0 if large). 
+- A binary variable is also called an indicator variable or sometimes a dummy variable. 
+- In R we call them factors.
 
 
+## {.smaller}
+
+- Suppose you have a variable $D_i$ that equals either 0 or 1, depending on whether the student–teacher ratio is less than 20:
+$$
+D_i = \begin{cases} 1 \text{ if $STR$ in $i^{th}$ school district < 20} \\
+0 \text{ if $STR$ in $i^{th}$ school district $\geq$ 20} \end{cases}
+$$
+
+- The regression model now is
+$$
+testscr = \beta_0 + \beta_1D_i+u_i
+$$
+
+>- Your task: Create the dummy variable and make an appropriate plot to look at both these variables $D_i$ and $testscr$.
+
+---
+
+```{r}
+#| code-fold: true
+# create a new factor variable D
+caschools %>% 
+  mutate(D = factor(
+              if_else(str < 20,1,0))) -> caschools
+
+# plot D and testscr
+caschools %>% 
+  ggplot()+
+  geom_boxplot(aes(x = D, y = testscr))+
+  labs(title = "Box plot")
+```
+
+## {.smaller}
+
+- Now, let's estimate the regression equation
+$$
+testscr = \beta_0 + \beta_1D_i+u_i
+$$
+
+```{r}
+lm(testscr ~ D, data = caschools) %>% 
+  stargazer::stargazer(type = "text")
+```
+
+- Interpretation
+  - The average test score for the subsample with student–teacher ratios greater than or equal to 20 (that is, for which D = 0) is 650.0, and the average test score for the subsample with student– teacher ratios less than 20 (so D = 1) is 650.0 + 7.4 = 657.4. 
+  - The difference between the sample average test scores for the two groups is 7.4. This is the OLS estimate of $\beta_1$, the coefficient on the student–teacher ratio binary variable D. 
 
