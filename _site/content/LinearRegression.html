@@ -2029,7 +2029,7 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <section id="section-4" class="slide level2 smaller">
 <h2></h2>
 <ul>
-<li>Suppose you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1 = 0\)</span> <strong>(two-sided test)</strong> at the 5% significance level. $H_0: _1 =0, H_1: _1 $</li>
+<li>Suppose you wish to test the null hypothesis that the slope <span class="math inline">\(\beta_1 = 0\)</span> <strong>(two-sided test)</strong> at the 5% significance level. <span class="math inline">\(H_0: \beta_1 = 0, H_1:\beta_1 \neq 0\)</span></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># the linear model</span></span>
@@ -2278,6 +2278,55 @@ Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
 <li>The difference between the sample average test scores for the two groups is 7.4. This is the OLS estimate of <span class="math inline">\(\beta_1\)</span>, the coefficient on the student–teacher ratio binary variable D.</li>
 </ul></li>
 </ul>
+</section></section>
+<section>
+<section id="heteroskedasticity-and-homoskedasticity" class="title-slide slide level1 center">
+<h1>Heteroskedasticity and Homoskedasticity</h1>
+
+</section>
+<section id="section-8" class="slide level2 smaller">
+<h2></h2>
+<ul>
+<li>The error term <span class="math inline">\(u_i\)</span> is <strong>homoskedastic</strong> if the variance of the conditional distribution of <span class="math inline">\(u_i\)</span> given <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Var(u_i|X_i) = x\)</span>, is constant for <span class="math inline">\(i = 1,2, ...,n\)</span> and in particular does not depend on <span class="math inline">\(x\)</span>. Otherwise, the error term is <strong>heteroskedastic</strong>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">data</span>(<span class="st">"CPSSWEducation"</span>, <span class="at">package =</span> <span class="st">"AER"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="fu">lm</span>(earnings <span class="sc">~</span> education, <span class="at">data =</span> CPSSWEducation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = earnings ~ education, data = CPSSWEducation)
+
+Coefficients:
+(Intercept)    education  
+     -3.134        1.467  </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">as_tibble</span>(CPSSWEducation) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(education), <span class="at">y =</span> earnings))<span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="sc">-</span><span class="fl">3.1</span>, <span class="at">slope =</span> <span class="fl">1.5</span>, <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'blue'</span>)<span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">100</span>))<span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'education'</span>, <span class="at">title =</span> <span class="st">"Education and Earnings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearRegression_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"><ul>
+<li>Observations:
+<ul>
+<li>The spread of the distribution of earnings increases with the years of education.</li>
+<li>Not all college graduates will be earning $25 per hour by the time they are 29, but some will, and workers with only ten years of education have no shot at those jobs</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
 <div class="footer footer-default">
 
 </div>

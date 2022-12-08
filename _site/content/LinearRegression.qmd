@@ -264,7 +264,7 @@ lm(testscr ~ str, data = caschools) %>%
 
 ## {.smaller}
 
-- Suppose you wish to test the null hypothesis that the slope $\beta_1 = 0$ **(two-sided test)** at the 5% significance level.  $H_0: \beta_1 =0, H_1: \beta_1 \neq 0 $
+- Suppose you wish to test the null hypothesis that the slope $\beta_1 = 0$ **(two-sided test)** at the 5% significance level.  $H_0: \beta_1 = 0, H_1:\beta_1 \neq 0$
 ```{r}
 # the linear model
 (model1 <- lm(testscr ~ str, data = caschools))
@@ -426,4 +426,37 @@ lm(testscr ~ D, data = caschools) %>%
 - Interpretation
   - The average test score for the subsample with student–teacher ratios greater than or equal to 20 (that is, for which D = 0) is 650.0, and the average test score for the subsample with student– teacher ratios less than 20 (so D = 1) is 650.0 + 7.4 = 657.4. 
   - The difference between the sample average test scores for the two groups is 7.4. This is the OLS estimate of $\beta_1$, the coefficient on the student–teacher ratio binary variable D. 
+
+# Heteroskedasticity and Homoskedasticity
+
+## {.smaller}
+
+- The error term $u_i$ is **homoskedastic** if the variance of the conditional distribution of $u_i$ given $X_i$, $Var(u_i|X_i) = x$, is constant for $i = 1,2, ...,n$ and in particular does not depend on $x$. Otherwise, the error term is **heteroskedastic**.
+
+```{r}
+data("CPSSWEducation", package = "AER")
+lm(earnings ~ education, data = CPSSWEducation)
+```
+
+---
+
+```{r}
+#| code-fold: true
+as_tibble(CPSSWEducation) %>% 
+  ggplot(aes(x = as.factor(education), y = earnings))+
+  geom_boxplot()+
+  geom_abline(intercept = -3.1, slope = 1.5, lwd = 1, col = 'blue')+
+  ylim(c(-10, 100))+
+  labs(x = 'education', title = "Education and Earnings")
+```
+- Observations:
+  - The spread of the distribution of earnings increases with the years of education.
+  - Not all college graduates will be earning $25 per hour by the time they are 29, but some will, and workers with only ten years of education have no shot at those jobs 
+  
+  
+---
+
+
+
+
 
