@@ -436,31 +436,27 @@ lm(testscr ~ D, data = caschools) %>%
 ```{r}
 data("CPSSWEducation", package = "AER")
 lm(earnings ~ education, data = CPSSWEducation)
+```
+
+---
+
+```{r}
+#| code-fold: true
 as_tibble(CPSSWEducation) %>% 
   ggplot(aes(x = as.factor(education), y = earnings))+
   geom_boxplot()+
   geom_abline(intercept = -3.1, slope = 1.5, lwd = 1, col = 'blue')+
-  ylim(c(-10, 100))
+  ylim(c(-10, 100))+
+  labs(x = 'education', title = "Education and Earnings")
 ```
+- Observations:
+  - The spread of the distribution of earnings increases with the years of education.
+  - Not all college graduates will be earning $25 per hour by the time they are 29, but some will, and workers with only ten years of education have no shot at those jobs 
+  
+  
+---
 
 
 
-```{r}
-caschools %>%
-  mutate(str1 = factor(
-    case_when(str <= 15 ~ 15,
-              str > 15 & str <= 17 ~ 17,
-              str > 17 & str <= 19 ~ 19,
-              str > 19 & str <= 21 ~ 21,
-              str > 21 & str <= 23 ~ 23,
-              str > 23 & str <= 25 ~ 25,
-              str > 25 & str <= 27 ~ 27,
-              TRUE ~ 0)
-  )) %>%  
-  ggplot(aes(x = str1, y = (testscr)))+
-  geom_boxplot() +
-  geom_abline(intercept = model1$coefficients[1],
-              slope = model1$coefficients[2], lwd = 1, col = 'blue')+
-  ylim(c(600,725))
-```
+
 
