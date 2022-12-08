@@ -438,7 +438,7 @@ data("CPSSWEducation", package = "AER")
 lm(earnings ~ education, data = CPSSWEducation)
 ```
 
----
+## {.smaller}
 
 ```{r}
 #| code-fold: true
